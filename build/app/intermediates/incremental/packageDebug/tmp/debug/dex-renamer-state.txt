@@ -1,0 +1,4 @@
+#Sat Mar 27 22:52:31 ICT 2021
+base.0=/Volumes/macDATA/HOCTAP/Bocote/Flutter/Workspaces/yoga/build/app/intermediates/dex/debug/mergeDexDebug/classes.dex
+path.0=classes.dex
+renamed.0=classes.dex
