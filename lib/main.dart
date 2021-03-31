@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:yoga/constants/app_path.dart';
 import 'package:yoga/modules/dashboard/screen/dashboard_screen.dart';
-import 'package:yoga/widgets/background_screen.dart';
 
 void main() {
   runApp(MyApp());

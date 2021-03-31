@@ -18,4 +18,17 @@ class Lang {
     this.ru,
     this.hl,
   });
+
+  Lang fromJson(Map<String, dynamic> json) {
+    return Lang(
+      id: json["id"] as int,
+      key: json["key"] as String,
+      pt: json["pt"] as String,
+      fr: json["fr"] as String,
+      gl: json["gl"],
+      lt: json["lt"],
+      ru: json["ru"],
+      hl: json["hl"],
+    );
+  }
 }

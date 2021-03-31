@@ -10,4 +10,13 @@ class Step {
     this.image,
     this.description,
   });
+
+  Step fromJson(Map<String, dynamic> json) {
+    return Step(
+      id: json["id"] as int,
+      name: json["name"],
+      image: json["image"],
+      description: json["description"],
+    );
+  }
 }

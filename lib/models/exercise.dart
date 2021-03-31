@@ -12,4 +12,14 @@ class Exercise {
     this.description,
     this.namefit,
   });
+
+  Exercise fromJson(Map<String, dynamic> json) {
+    return Exercise(
+      id: json["id"] as int,
+      name: json["name"] as String,
+      image: json["image"] as String,
+      description: json["description"] as String,
+      namefit: json["namefit"] as String,
+    );
+  }
 }

@@ -1,9 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/svg.dart';
-import 'dart:math' as math;
-
 import 'package:yoga/constants/app_color.dart';
-import 'package:yoga/constants/app_path.dart';
 
 class BackgroundMain extends StatelessWidget {
   @override
