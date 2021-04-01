@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:yoga/constants/app_color.dart';
 import 'package:yoga/constants/app_path.dart';
+import 'package:yoga/modules/exercise/widget/exercise_card.dart';
 
 class ExerciseListScreen extends StatelessWidget {
   @override
@@ -21,6 +22,7 @@ class ExerciseListScreen extends StatelessWidget {
           top: true,
           child: Column(
             children: [
+              // header
               Padding(
                 padding: const EdgeInsets.only(left: 25, right: 25),
                 child: Row(
@@ -85,66 +87,76 @@ class ExerciseListScreen extends StatelessWidget {
                   ),
                 ),
               ),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceAround,
-                children: [
-                  Container(
-                    alignment: Alignment.center,
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        SizedBox(
-                          height: 24,
-                          width: 24,
-                          child: SvgPicture.asset(
-                            AppPath.toAssetsIcons + "clock.svg",
-                            color: AppColor.purpleDecor,
-                          ),
-                        ),
-                        Padding(
-                          padding: const EdgeInsets.only(left: 8),
-                          child: Text(
-                            "7 minutes",
-                            style: TextStyle(
-                              fontWeight: FontWeight.w400,
-                              fontFamily: "GT",
-                              fontSize: 17,
-                              color: Colors.black,
+              Padding(
+                padding: const EdgeInsets.symmetric(vertical: 4),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceAround,
+                  children: [
+                    Container(
+                      alignment: Alignment.center,
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          SizedBox(
+                            height: 24,
+                            width: 24,
+                            child: SvgPicture.asset(
+                              AppPath.toAssetsIcons + "clock.svg",
+                              color: AppColor.purpleDecor,
                             ),
                           ),
-                        ),
-                      ],
-                    ),
-                  ),
-                  Container(
-                    child: Row(
-                      children: [
-                        SizedBox(
-                          height: 20,
-                          width: 20,
-                          child: SvgPicture.asset(
-                            AppPath.toAssetsIcons + 'burn.svg',
-                            semanticsLabel: 'Burn',
-                            color: AppColor.grayBlue,
-                          ),
-                        ),
-                        Padding(
-                          padding: const EdgeInsets.only(left: 7),
-                          child: Text(
-                            '14 exercises',
-                            style: TextStyle(
-                              color: Colors.black,
-                              fontSize: 17,
-                              fontFamily: 'GT',
-                              fontWeight: FontWeight.w400,
+                          Padding(
+                            padding: const EdgeInsets.only(left: 8),
+                            child: Text(
+                              "7 minutes",
+                              style: TextStyle(
+                                fontWeight: FontWeight.w400,
+                                fontFamily: "GT",
+                                fontSize: 17,
+                                color: Colors.black,
+                              ),
                             ),
                           ),
-                        ),
-                      ],
+                        ],
+                      ),
                     ),
-                  ),
-                ],
-              )
+                    Container(
+                      child: Row(
+                        children: [
+                          SizedBox(
+                            height: 20,
+                            width: 20,
+                            child: SvgPicture.asset(
+                              AppPath.toAssetsIcons + 'burn.svg',
+                              semanticsLabel: 'Burn',
+                              color: AppColor.grayBlue,
+                            ),
+                          ),
+                          Padding(
+                            padding: const EdgeInsets.only(left: 7),
+                            child: Text(
+                              '14 exercises',
+                              style: TextStyle(
+                                color: Colors.black,
+                                fontSize: 17,
+                                fontFamily: 'GT',
+                                fontWeight: FontWeight.w400,
+                              ),
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+              //end header
+              //
+              //start card
+              ExerciseCard(size: size),
+              ExerciseCard(size: size),
+              ExerciseCard(size: size),
+              ExerciseCard(size: size),
             ],
           ),
         ),

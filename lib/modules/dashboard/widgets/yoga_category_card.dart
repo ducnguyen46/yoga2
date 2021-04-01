@@ -113,7 +113,7 @@ class YogaCategoryCard extends StatelessWidget {
                                       fontWeight: FontWeight.w400,
                                     ),
                                   ),
-                                )
+                                ),
                               ],
                             ),
                           ],

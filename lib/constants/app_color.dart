@@ -8,4 +8,5 @@ class AppColor {
   static var grayBlue = Color(0xFF517A91);
   static var reallyWhite = Color(0xFFFAFDFF);
   static var darkGray = Color(0xFF293136);
+  static var grayBlack = Color(0xFF333333);
 }
