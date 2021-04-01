@@ -6,9 +6,6 @@ import 'package:path/path.dart';
 import 'package:sqflite/sqflite.dart';
 
 import '../../models/catagory.dart';
-import '../../models/catagory.dart';
-import '../../models/exercise.dart';
-import '../../models/exercise.dart';
 import '../../models/exercise.dart';
 
 class DatabaseProvider {
@@ -65,17 +62,38 @@ class DatabaseProvider {
     return categories;
   }
 
+  Future<List<String>> getListCategoryType() async {
+    var db = await database;
+    var listTypeCategory =
+        await db.query("category", distinct: true, columns: ["type"]);
+    List<String> types =
+        listTypeCategory.map((json) => json["type"].toString()).toList();
+
+    return types;
+  }
+
+  Future<List<Category>> getCategoryByType(String type) async {
+    var db = await database;
+    var listMapCategory =
+        await db.query("category", where: 'type = ?', whereArgs: [type]);
+
+    // var listMapCategory =
+    //     await db.rawQuery('SELECT * FROM "category" WHERE type = "popular"');
+    List<Category> categories =
+        listMapCategory.map((json) => Category().fromJson(json)).toList();
+
+    return categories;
+  }
+
   //Exercise
   Future<List<Exercise>> getExerciseFromCategory(Category category) async {
     var db = await database;
-    var listExerciseCategory = await db
-        .query("exercise", where: '"namefit" = ?', whereArgs: [category.namefit]);
+    var listExerciseCategory = await db.query("exercise",
+        where: '"namefit" = ?', whereArgs: [category.namefit]);
 
     List<Exercise> exercises =
         listExerciseCategory.map((json) => Exercise().fromJson(json)).toList();
 
     return exercises;
   }
-
-  
 }

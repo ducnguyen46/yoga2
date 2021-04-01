@@ -40,7 +40,8 @@ flutter:
   assets:
     - assets/
     - assets/icons/
-    - assets/images/
+    - assets/images/exercise/
+    - assets/images/category_card/
     - assets/database/fiveYoga.db
 
   fonts:
