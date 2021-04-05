@@ -1,25 +1,33 @@
+import 'dart:math';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:yoga/constants/app_color.dart';
 import 'package:yoga/constants/app_path.dart';
+import 'package:yoga/models/catagory.dart';
+import 'package:yoga/models/exercise.dart';
+
+import 'dialog_exercise.dart';
 
 class ExerciseCard extends StatelessWidget {
   const ExerciseCard({
     Key key,
     @required this.size,
+    @required this.exercise,
   }) : super(key: key);
 
+  final Exercise exercise;
   final Size size;
 
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: () {
-        print("tap");
+        _showExerciseDialog(context, size, exercise);
       },
       child: Container(
-        margin: EdgeInsets.only(top: 24),
-        width: size.width - 50,
+        margin: EdgeInsets.only(top: 24, right: 4),
+        width: size.width - 100,
         decoration: BoxDecoration(
             color: AppColor.reallyWhite,
             borderRadius: BorderRadius.circular(9),
@@ -37,7 +45,7 @@ class ExerciseCard extends StatelessWidget {
               width: 54,
               height: 54,
               child: Image.asset(
-                AppPath.toAssetsExercise + "boat.png",
+                AppPath.toAssetsExercise + "${exercise.image}.png",
                 fit: BoxFit.fill,
               ),
             ),
@@ -50,7 +58,7 @@ class ExerciseCard extends StatelessWidget {
                     Padding(
                       padding: const EdgeInsets.only(bottom: 8),
                       child: Text(
-                        "Easy Pose",
+                        "${exercise.name}",
                         style: TextStyle(
                           color: AppColor.grayBlue,
                           fontFamily: "GT",
@@ -60,7 +68,7 @@ class ExerciseCard extends StatelessWidget {
                       ),
                     ),
                     Text(
-                      "Come into a seated position with the buttocks on the Come into a seated position with the buttocks on the Come into a seated position with the buttocks on the",
+                      "${exercise.description}",
                       style: TextStyle(
                         color: AppColor.grayBlack,
                         fontSize: 14,
@@ -84,6 +92,18 @@ class ExerciseCard extends StatelessWidget {
               ),
             ),
           ],
+        ),
+      ),
+    );
+  }
+
+  _showExerciseDialog(BuildContext context, Size size, Exercise exercise) {
+    showDialog(
+      context: context,
+      builder: (_) => Dialog(
+        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(18)),
+        child: DialogExercise(
+          exercise: exercise,
         ),
       ),
     );

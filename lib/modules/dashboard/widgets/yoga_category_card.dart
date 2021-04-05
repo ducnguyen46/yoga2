@@ -3,6 +3,7 @@ import 'package:flutter_svg/svg.dart';
 import 'package:yoga/constants/app_color.dart';
 import 'package:yoga/constants/app_path.dart';
 import 'package:yoga/models/catagory.dart';
+import 'package:yoga/modules/exercise/screen/exercise_list_screen.dart';
 
 class YogaCategoryCard extends StatelessWidget {
   final Category category;
@@ -121,7 +122,14 @@ class YogaCategoryCard extends StatelessWidget {
 
                         // Start Button
                         InkWell(
-                          onTap: () => print('Tap tap'),
+                          onTap: () {
+                            Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (context) => ExerciseListScreen(
+                                          category: category,
+                                        )));
+                          },
                           splashColor: AppColor.blueDark.withOpacity(0.8),
                           child: Container(
                             padding: EdgeInsets.all(6),
