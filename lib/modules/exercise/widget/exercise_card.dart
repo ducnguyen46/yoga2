@@ -1,10 +1,7 @@
-import 'dart:math';
-
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:yoga/constants/app_color.dart';
 import 'package:yoga/constants/app_path.dart';
-import 'package:yoga/models/catagory.dart';
 import 'package:yoga/models/exercise.dart';
 
 import 'dialog_exercise.dart';

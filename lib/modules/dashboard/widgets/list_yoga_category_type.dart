@@ -83,7 +83,6 @@ class ListYogaCategory extends StatelessWidget {
               scrollDirection: Axis.horizontal,
               itemCount: _listCategory.length,
               itemBuilder: (context, index) {
-                print('at: ' + index.toString());
                 return YogaCategoryCard(
                   category: _listCategory[index],
                 );
@@ -115,11 +114,11 @@ class ListYogaCategory extends StatelessWidget {
       case "seasons":
         return "Seasons";
 
-      case "rountlnes":
-        return "Rountlnes";
+      case "routines":
+        return "Routines";
 
       default:
-        return "Something wrong";
+        return "Something other";
     }
   }
 }

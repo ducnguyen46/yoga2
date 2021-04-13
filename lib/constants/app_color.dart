@@ -10,4 +10,9 @@ class AppColor {
   static var darkGray = Color(0xFF293136); // gray
   static var grayBlack = Color(0xFF333333);
   static var lightGray = Color(0xFFF0F0F3);
+
+  static var circleGradient1 = Color(0xFF626BA1);
+  static var circleGradient2 = Color(0xFF8D95C3);
+
+  // static var gradient = Gradient(colors: [circleGradient1, circleGradient2]);
 }

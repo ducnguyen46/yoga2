@@ -23,11 +23,15 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
+  chewie: ^1.0.0
   cupertino_icons: ^1.0.2
   flutter_svg: ^0.19.3
   intl: ^0.17.0
   path: ^1.8.0
+  percent_indicator: ^3.0.1
   sqflite: ^2.0.0+3
+  table_calendar: ^3.0.0
+  video_player: ^2.1.0
 
 dev_dependencies:
   flutter_test:
@@ -40,8 +44,10 @@ flutter:
   assets:
     - assets/
     - assets/icons/
+    - assets/images/
     - assets/images/exercise/
     - assets/images/category_card/
+    - assets/videos/
     - assets/database/fiveYoga.db
 
   fonts:
