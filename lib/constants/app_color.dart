@@ -14,5 +14,7 @@ class AppColor {
   static var circleGradient1 = Color(0xFF626BA1);
   static var circleGradient2 = Color(0xFF8D95C3);
 
+  static var redOrange = Color(0xFFFF6957);
+
   // static var gradient = Gradient(colors: [circleGradient1, circleGradient2]);
 }

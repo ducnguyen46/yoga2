@@ -81,11 +81,17 @@ class ListYogaCategory extends StatelessWidget {
             child: ListView.builder(
               controller: _controller,
               scrollDirection: Axis.horizontal,
-              itemCount: _listCategory.length,
+              itemCount: _listCategory.length + 1,
               itemBuilder: (context, index) {
-                return YogaCategoryCard(
-                  category: _listCategory[index],
-                );
+                if (index == _listCategory.length) print(index);
+                return index < _listCategory.length
+                    ? YogaCategoryCard(
+                        category: _listCategory[index],
+                      )
+                    : Container(
+                        height: 263,
+                        width: 204 / 2,
+                      );
               },
             ),
           ),
@@ -109,7 +115,7 @@ class ListYogaCategory extends StatelessWidget {
         return "Stress Relax";
 
       case "women":
-        return "women";
+        return "Women";
 
       case "seasons":
         return "Seasons";

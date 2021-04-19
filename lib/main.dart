@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:yoga/modules/dashboard/screen/dashboard_screen.dart';
-import 'package:yoga/modules/exercise/screen/exercise_screen.dart';
-import 'package:yoga/modules/exercise/widget/dialog_end_exercise.dart';
+import 'package:yoga/modules/splashscreen/screen/first_time_add_weight.dart';
+import 'package:yoga/modules/splashscreen/screen/testSharedPerences.dart';
 
 void main() {
   runApp(MyApp());
@@ -17,7 +17,7 @@ class MyApp extends StatelessWidget {
         brightness: Brightness.light,
         primarySwatch: Colors.blue,
       ),
-      home: DashboardScreen(),
+      home: FirstTimeOpenApp(),
     );
   }
 }

@@ -4,7 +4,7 @@ import 'package:yoga/constants/app_color.dart';
 import 'package:yoga/constants/app_path.dart';
 import 'package:yoga/models/exercise.dart';
 
-import 'dialog_exercise.dart';
+import '../../dialog/dialog_exercise.dart';
 
 class ExerciseCard extends StatelessWidget {
   const ExerciseCard({

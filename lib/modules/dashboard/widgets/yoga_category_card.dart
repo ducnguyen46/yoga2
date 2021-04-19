@@ -38,7 +38,20 @@ class YogaCategoryCard extends StatelessWidget {
             Container(
               width: 204,
               height: 89,
-              color: AppColor.reallyWhite,
+              decoration: BoxDecoration(
+                color: AppColor.reallyWhite,
+                borderRadius: BorderRadius.only(
+                  bottomLeft: Radius.circular(10),
+                  bottomRight: Radius.circular(10),
+                ),
+                boxShadow: [
+                  BoxShadow(
+                    color: AppColor.grayBlue.withOpacity(0.4),
+                    offset: Offset(0, 4),
+                    blurRadius: 5,
+                  ),
+                ],
+              ),
               child: Padding(
                 padding: const EdgeInsets.fromLTRB(7, 7, 7, 7),
                 child: Column(

@@ -18,6 +18,7 @@ class ExerciseListScreen extends StatefulWidget {
 
 class _ExerciseListScreenState extends State<ExerciseListScreen> {
   bool likeExercise = false;
+  bool like = false;
   List<Exercise> listExercise = [];
 
   Widget notLike = SvgPicture.asset(
@@ -29,20 +30,59 @@ class _ExerciseListScreenState extends State<ExerciseListScreen> {
     AppPath.toAssetsIcons + "like.svg",
     color: AppColor.purpleDecor,
   );
+
+  void checkMark() {
+    DatabaseProvider.db.categoryMarked(widget.category.namefit).then(
+      (value) {
+        setState(() {
+          like = value;
+        });
+        print(value);
+      },
+      onError: (error) {
+        print(error);
+      },
+    );
+  }
+
+  void markAndUnmark(bool like) async {
+    DatabaseProvider.db.markCategory(widget.category.namefit, like).then(
+        (value) {
+      print(value);
+    }, onError: (error) {
+      print(error);
+    });
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    checkMark();
+  }
+
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
-
     return Scaffold(
-      body: Stack(
-        children: [
-          Container(
-            height: size.height,
-            width: size.width,
-            decoration: BoxDecoration(
-              color: AppColor.smokeWhite,
+      body: Container(
+        height: size.height,
+        width: size.width,
+        decoration: BoxDecoration(
+          color: AppColor.smokeWhite,
+        ),
+        child: Stack(
+          children: [
+            Positioned(
+              top: 0,
+              right: 0,
+              child: SvgPicture.asset(
+                AppPath.toAssetsImages + "flower.svg",
+                height: size.width * 1,
+                width: size.width * 0.7,
+              ),
+              // child: Image.asset(AppPath.toAssetsImages + "flower.png"),
             ),
-            child: SafeArea(
+            SafeArea(
               bottom: false,
               child: Column(
                 children: [
@@ -80,15 +120,12 @@ class _ExerciseListScreenState extends State<ExerciseListScreen> {
                           ),
                         ),
                         GestureDetector(
-                          onTap: () {
+                          onTap: () async {
                             setState(() {
                               likeExercise = !likeExercise;
                             });
-                          },
-                          onDoubleTap: () {
-                            setState(() {
-                              likeExercise = true;
-                            });
+                            markAndUnmark(likeExercise);
+                            checkMark();
                           },
                           child: Container(
                             height: 42,
@@ -105,7 +142,7 @@ class _ExerciseListScreenState extends State<ExerciseListScreen> {
                                 ]),
                             child: Padding(
                               padding: const EdgeInsets.all(9.0),
-                              child: likeExercise == true ? liked : notLike,
+                              child: like ? liked : notLike,
                             ),
                           ),
                         ),
@@ -221,45 +258,44 @@ class _ExerciseListScreenState extends State<ExerciseListScreen> {
                 ],
               ),
             ),
-          ),
-
-          //Button start
-          Positioned(
-            left: size.width / 4 + 20,
-            bottom: 25,
-            child: InkWell(
-              onTap: () {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                    builder: (_) => ExerciseScreen(
-                      listExercise: listExercise,
+            //Button start
+            Positioned(
+              left: size.width / 4 + 20,
+              bottom: 25,
+              child: InkWell(
+                onTap: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (_) => ExerciseScreen(
+                        listExercise: listExercise,
+                      ),
                     ),
+                  );
+                },
+                child: Container(
+                  width: size.width / 2 - 40,
+                  height: 32,
+                  decoration: BoxDecoration(
+                    color: AppColor.purpleDecor,
+                    borderRadius: BorderRadius.circular(10),
                   ),
-                );
-              },
-              child: Container(
-                width: size.width / 2 - 40,
-                height: 32,
-                decoration: BoxDecoration(
-                  color: AppColor.purpleDecor,
-                  borderRadius: BorderRadius.circular(10),
-                ),
-                child: Center(
-                  child: Text(
-                    "Start",
-                    style: TextStyle(
-                      color: AppColor.reallyWhite,
-                      fontSize: 16,
-                      fontWeight: FontWeight.w500,
-                      fontFamily: "GT",
+                  child: Center(
+                    child: Text(
+                      "Start",
+                      style: TextStyle(
+                        color: AppColor.reallyWhite,
+                        fontSize: 16,
+                        fontWeight: FontWeight.w500,
+                        fontFamily: "GT",
+                      ),
                     ),
                   ),
                 ),
               ),
             ),
-          ),
-        ],
+          ],
+        ),
       ),
     );
   }
