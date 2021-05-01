@@ -134,6 +134,12 @@
       "languageVersion": "2.12"
     },
     {
+      "name": "nested",
+      "rootUri": "file:///Users/ducnguyen46/Developer/flutter/.pub-cache/hosted/pub.dartlang.org/nested-1.0.0",
+      "packageUri": "lib/",
+      "languageVersion": "2.12"
+    },
+    {
       "name": "path",
       "rootUri": "file:///Users/ducnguyen46/Developer/flutter/.pub-cache/hosted/pub.dartlang.org/path-1.8.0",
       "packageUri": "lib/",
@@ -202,6 +208,12 @@
     {
       "name": "process",
       "rootUri": "file:///Users/ducnguyen46/Developer/flutter/.pub-cache/hosted/pub.dartlang.org/process-4.2.1",
+      "packageUri": "lib/",
+      "languageVersion": "2.12"
+    },
+    {
+      "name": "provider",
+      "rootUri": "file:///Users/ducnguyen46/Developer/flutter/.pub-cache/hosted/pub.dartlang.org/provider-5.0.0",
       "packageUri": "lib/",
       "languageVersion": "2.12"
     },
@@ -314,6 +326,12 @@
       "languageVersion": "2.12"
     },
     {
+      "name": "timer_builder",
+      "rootUri": "file:///Users/ducnguyen46/Developer/flutter/.pub-cache/hosted/pub.dartlang.org/timer_builder-2.0.0",
+      "packageUri": "lib/",
+      "languageVersion": "2.12"
+    },
+    {
       "name": "typed_data",
       "rootUri": "file:///Users/ducnguyen46/Developer/flutter/.pub-cache/hosted/pub.dartlang.org/typed_data-1.3.0",
       "packageUri": "lib/",
@@ -392,7 +410,7 @@
       "languageVersion": "2.7"
     }
   ],
-  "generated": "2021-04-19T08:03:51.872362Z",
+  "generated": "2021-04-29T04:19:51.535932Z",
   "generator": "pub",
   "generatorVersion": "2.12.1"
 }

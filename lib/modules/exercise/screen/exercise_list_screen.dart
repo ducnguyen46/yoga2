@@ -6,6 +6,7 @@ import 'package:yoga/core/data/database.dart';
 import 'package:yoga/models/catagory.dart';
 import 'package:yoga/models/exercise.dart';
 import 'package:yoga/modules/exercise/screen/exercise_screen.dart';
+import 'package:yoga/modules/exercise/screen/testing.dart';
 import 'package:yoga/modules/exercise/widget/exercise_card.dart';
 
 class ExerciseListScreen extends StatefulWidget {
@@ -46,7 +47,7 @@ class _ExerciseListScreenState extends State<ExerciseListScreen> {
   }
 
   void markAndUnmark(bool like) async {
-    DatabaseProvider.db.markCategory(widget.category.namefit, like).then(
+    await DatabaseProvider.db.markCategory(widget.category.namefit, like).then(
         (value) {
       print(value);
     }, onError: (error) {
@@ -267,7 +268,10 @@ class _ExerciseListScreenState extends State<ExerciseListScreen> {
                   Navigator.push(
                     context,
                     MaterialPageRoute(
-                      builder: (_) => ExerciseScreen(
+                      builder: (_) =>
+                          // Testing()
+                          ExerciseScreen(
+                        category: widget.category,
                         listExercise: listExercise,
                       ),
                     ),
