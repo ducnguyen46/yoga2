@@ -3,6 +3,7 @@ import 'package:flutter_svg/svg.dart';
 import 'package:yoga/constants/app_color.dart';
 import 'package:yoga/constants/app_path.dart';
 import 'package:yoga/modules/progress/screen/progress_screen.dart';
+import 'package:yoga/modules/rountine/screen/rountine_screen.dart';
 import 'package:yoga/modules/setting/screen/setting_screen.dart';
 
 import 'home_screen.dart';
@@ -42,7 +43,7 @@ class _DashboardScreenState extends State<DashboardScreen>
   List<Widget> screens = [
     HomeScreen(),
     ProgressScreen(),
-    HomeScreen(),
+    RountineScreen(),
     SettingScreen(),
   ];
 

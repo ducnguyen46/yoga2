@@ -149,6 +149,18 @@ class DatabaseProvider {
     return (liked as int == 1) ? true : false;
   }
 
+  //list category marked
+  Future<List<Category>> getListCategoryMarked() async {
+    var db = await database;
+    var listMapCategory =
+        await db.query("category", where: 'mark = ?', whereArgs: [1]);
+
+    List<Category> categories =
+        listMapCategory.map((json) => Category().fromJson(json)).toList();
+
+    return categories;
+  }
+
   //-------------------------------- * ----------------------------
   // Db liên quan đến Exercise
   //
