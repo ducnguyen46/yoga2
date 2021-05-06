@@ -133,7 +133,7 @@ class _DashboardScreenState extends State<DashboardScreen>
               left: 0,
               child: SafeArea(
                 child: Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 25),
+                  padding: const EdgeInsets.only(left: 25, right: 25, top: 10),
                   child: Row(
                     children: [
                       GestureDetector(

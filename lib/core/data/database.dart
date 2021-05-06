@@ -1,7 +1,6 @@
 import 'dart:io';
 import 'dart:typed_data';
 
-import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:path/path.dart';
 import 'package:sqflite/sqflite.dart';
@@ -31,48 +30,50 @@ class DatabaseProvider {
     var databasesPath = await getDatabasesPath();
     var path = join(databasesPath, 'fiveYoga.db');
 
-    //delete database if exist and make new
-    await deleteDatabase(path);
+    // //delete database if exist and make new
+    // await deleteDatabase(path);
 
-    //make sure dir exist
-    try {
-      await Directory(dirname(path)).create(recursive: true);
-    } catch (_) {
-      print(_);
-    }
-
-    // copy database from assets
-    ByteData data =
-        await rootBundle.load(join('assets/database', 'fiveYoga.db'));
-    List<int> bytes =
-        data.buffer.asUint8List(data.offsetInBytes, data.lengthInBytes);
-    await File(path).writeAsBytes(bytes, flush: true);
-
-    // // Check if the database exists
-    // var exists = await databaseExists(path);
-
-    // if (!exists) {
-    //   // Should happen only the first time you launch your application
-    //   print("Creating new copy from asset");
-
-    //   // Make sure the parent directory exists
-    //   try {
-    //     await Directory(dirname(path)).create(recursive: true);
-    //   } catch (_) {
-    //     print(_);
-    //   }
-
-    //   // Copy from asset
-    //   ByteData data =
-    //       await rootBundle.load(join('assets/database', 'fiveYoga.db'));
-    //   List<int> bytes =
-    //       data.buffer.asUint8List(data.offsetInBytes, data.lengthInBytes);
-
-    //   // Write and flush the bytes written
-    //   await File(path).writeAsBytes(bytes, flush: true);
-    // } else {
-    //   print("Opening existing database");
+    // //make sure dir exist
+    // try {
+    //   await Directory(dirname(path)).create(recursive: true);
+    // } catch (_) {
+    //   print(_);
     // }
+
+    // // copy database from assets
+    // ByteData data =
+    //     await rootBundle.load(join('assets/database', 'fiveYoga.db'));
+    // List<int> bytes =
+    //     data.buffer.asUint8List(data.offsetInBytes, data.lengthInBytes);
+    // await File(path).writeAsBytes(bytes, flush: true);
+    //
+    // __________________
+
+    // Check if the database exists
+    var exists = await databaseExists(path);
+
+    if (!exists) {
+      // Should happen only the first time you launch your application
+      print("Creating new copy from asset");
+
+      // Make sure the parent directory exists
+      try {
+        await Directory(dirname(path)).create(recursive: true);
+      } catch (_) {
+        print(_);
+      }
+
+      // Copy from asset
+      ByteData data =
+          await rootBundle.load(join('assets/database', 'fiveYoga.db'));
+      List<int> bytes =
+          data.buffer.asUint8List(data.offsetInBytes, data.lengthInBytes);
+
+      // Write and flush the bytes written
+      await File(path).writeAsBytes(bytes, flush: true);
+    } else {
+      print("Opening existing database");
+    }
 
     return await openDatabase(
       path,
@@ -275,27 +276,28 @@ class DatabaseProvider {
   // DB liên quan đến ExerciseCount
   //
   // add exercise completed
-  Future<bool> addUpdateExcerciseCompleted(ExcerciseCompleted eC) async {
+  Future<bool> addUpdateExcerciseCompleted(
+      ExerciseCompleted exerciseCompleted) async {
     var db = await database;
     //if have EC with 'namefit'
     var queryECInDB = await db.query("exercise_completed",
-        where: "namefit = ?", whereArgs: [eC.namefit]);
-    List<ExcerciseCompleted> listECInFB = queryECInDB
-        .map((json) => ExcerciseCompleted.init().fromJSON(json))
+        where: "namefit = ?", whereArgs: [exerciseCompleted.namefit]);
+    List<ExerciseCompleted> listECInFB = queryECInDB
+        .map((json) => ExerciseCompleted.init().fromJSON(json))
         .toList();
 
     if (listECInFB.isNotEmpty) {
-      ExcerciseCompleted eCInDB = listECInFB[0];
-      ExcerciseCompleted eCtoUpdate = ExcerciseCompleted(
+      ExerciseCompleted eCInDB = listECInFB[0];
+      ExerciseCompleted eCtoUpdate = ExerciseCompleted(
         id: eCInDB.id,
         namefit: eCInDB.namefit,
-        exerciseCount: (eCInDB.exerciseCount + eC.exerciseCount),
-        timeCount: (eCInDB.timeCount + eC.timeCount),
+        exerciseCount: (eCInDB.exerciseCount + exerciseCompleted.exerciseCount),
+        timeCount: (eCInDB.timeCount + exerciseCompleted.timeCount),
       );
 
       var updateEC = await db.update(
         "exercise_completed",
-        ExcerciseCompleted.init().toJsonWoId(eCtoUpdate),
+        ExerciseCompleted.init().toJsonWoId(eCtoUpdate),
         where: "id = ?",
         whereArgs: [eCtoUpdate.id],
       );
@@ -304,9 +306,10 @@ class DatabaseProvider {
     } else {
       var insertEC = await db.insert(
         "exercise_completed",
-        ExcerciseCompleted.init().toJsonWoId(eC),
+        ExerciseCompleted.init().toJsonWoId(exerciseCompleted),
       );
 
+      print(insertEC);
       return (insertEC == 1) ? true : false;
     }
   }
@@ -315,7 +318,10 @@ class DatabaseProvider {
   Future<int> countWorkoutCompleted() async {
     var db = await database;
     var queryCount = await db
-        .query("excercise_completed", columns: ["COUNT(namefit) as count"]);
+        .query("exercise_completed", columns: ["COUNT(namefit) as count"]);
+
+    // var queryCount = await db
+    //     .rawQuery("SELECT COUNT(namefit) as count FROM exercise_completed");
 
     int count = queryCount.map((json) => json["count"]).toList()[0];
 
@@ -325,21 +331,21 @@ class DatabaseProvider {
   // tính tổng các bài tập đã tập
   Future<int> sumExerciseCompleted() async {
     var db = await database;
-    var queryCount = await db.query("excercise_completed",
-        columns: ["SUM(exercise_count) as count"]);
+    var queryCount = await db.query("exercise_completed",
+        columns: ["SUM(exercise_count) as exercise"]);
 
-    int count = queryCount.map((json) => json["count"]).toList()[0];
+    int count = queryCount.map((json) => json["exercise"]).toList()[0];
 
     return count;
   }
 
   // tính tổng thời gian trong các bài tập
-  Future<int> sumTimeCompleted() async {
+  Future<double> sumTimeCompleted() async {
     var db = await database;
-    var queryCount = await db
-        .query("excercise_completed", columns: ["SUM(time_count) as count"]);
+    var queryCount = await db.query("exercise_completed",
+        columns: ["SUM(time_count) as time_count"]);
 
-    int count = queryCount.map((json) => json["count"]).toList()[0];
+    double count = queryCount.map((json) => json["time_count"]).toList()[0];
 
     return count;
   }
