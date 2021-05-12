@@ -327,7 +327,9 @@ class _ProgressScreenState extends State<ProgressScreen> {
                                 default:
                                   if (!snapshot.hasError) {
                                     return CalculateExercise(
-                                      value: "${snapshot.data}",
+                                      value: snapshot.data != null
+                                          ? "${snapshot.data}"
+                                          : "No info",
                                       title: "Workout",
                                     );
                                   } else {
@@ -357,7 +359,9 @@ class _ProgressScreenState extends State<ProgressScreen> {
                                 default:
                                   if (!snapshot.hasError) {
                                     return CalculateExercise(
-                                      value: "${snapshot.data}",
+                                      value: snapshot.data != null
+                                          ? "${snapshot.data}"
+                                          : "No info",
                                       title: "Exercises",
                                     );
                                   } else {
@@ -387,7 +391,9 @@ class _ProgressScreenState extends State<ProgressScreen> {
                                 default:
                                   if (!snapshot.hasError) {
                                     return CalculateExercise(
-                                      value: "${snapshot.data}",
+                                      value: snapshot.data != null
+                                          ? "${snapshot.data}"
+                                          : "No info",
                                       title: "Minutes",
                                     );
                                   } else {
