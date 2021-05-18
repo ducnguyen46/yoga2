@@ -1,0 +1,26 @@
+[
+    {
+        "merged": "/Volumes/macDATA/HOCTAP/Bocote/Flutter/yoga2/build/video_player/intermediates/res/merged/release/layout/notification_template_part_chronometer.xml",
+        "source": "/Users/ducnguyen46/.gradle/caches/transforms-2/files-2.1/da310b12d325959a2e8cfc466fbff441/core-1.1.0/res/layout/notification_template_part_chronometer.xml"
+    },
+    {
+        "merged": "/Volumes/macDATA/HOCTAP/Bocote/Flutter/yoga2/build/video_player/intermediates/res/merged/release/layout/notification_template_part_time.xml",
+        "source": "/Users/ducnguyen46/.gradle/caches/transforms-2/files-2.1/da310b12d325959a2e8cfc466fbff441/core-1.1.0/res/layout/notification_template_part_time.xml"
+    },
+    {
+        "merged": "/Volumes/macDATA/HOCTAP/Bocote/Flutter/yoga2/build/video_player/intermediates/res/merged/release/layout/notification_action_tombstone.xml",
+        "source": "/Users/ducnguyen46/.gradle/caches/transforms-2/files-2.1/da310b12d325959a2e8cfc466fbff441/core-1.1.0/res/layout/notification_action_tombstone.xml"
+    },
+    {
+        "merged": "/Volumes/macDATA/HOCTAP/Bocote/Flutter/yoga2/build/video_player/intermediates/res/merged/release/layout/notification_action.xml",
+        "source": "/Users/ducnguyen46/.gradle/caches/transforms-2/files-2.1/da310b12d325959a2e8cfc466fbff441/core-1.1.0/res/layout/notification_action.xml"
+    },
+    {
+        "merged": "/Volumes/macDATA/HOCTAP/Bocote/Flutter/yoga2/build/video_player/intermediates/res/merged/release/layout/custom_dialog.xml",
+        "source": "/Users/ducnguyen46/.gradle/caches/transforms-2/files-2.1/da310b12d325959a2e8cfc466fbff441/core-1.1.0/res/layout/custom_dialog.xml"
+    },
+    {
+        "merged": "/Volumes/macDATA/HOCTAP/Bocote/Flutter/yoga2/build/video_player/intermediates/res/merged/release/layout/notification_template_icon_group.xml",
+        "source": "/Users/ducnguyen46/.gradle/caches/transforms-2/files-2.1/da310b12d325959a2e8cfc466fbff441/core-1.1.0/res/layout/notification_template_icon_group.xml"
+    }
+]

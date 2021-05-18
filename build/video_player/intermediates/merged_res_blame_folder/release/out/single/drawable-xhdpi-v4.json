@@ -1,0 +1,22 @@
+[
+    {
+        "merged": "/Volumes/macDATA/HOCTAP/Bocote/Flutter/yoga2/build/video_player/intermediates/res/merged/release/drawable-xhdpi-v4/notify_panel_notification_icon_bg.png",
+        "source": "/Users/ducnguyen46/.gradle/caches/transforms-2/files-2.1/da310b12d325959a2e8cfc466fbff441/core-1.1.0/res/drawable-xhdpi-v4/notify_panel_notification_icon_bg.png"
+    },
+    {
+        "merged": "/Volumes/macDATA/HOCTAP/Bocote/Flutter/yoga2/build/video_player/intermediates/res/merged/release/drawable-xhdpi-v4/notification_bg_low_pressed.9.png",
+        "source": "/Users/ducnguyen46/.gradle/caches/transforms-2/files-2.1/da310b12d325959a2e8cfc466fbff441/core-1.1.0/res/drawable-xhdpi-v4/notification_bg_low_pressed.9.png"
+    },
+    {
+        "merged": "/Volumes/macDATA/HOCTAP/Bocote/Flutter/yoga2/build/video_player/intermediates/res/merged/release/drawable-xhdpi-v4/notification_bg_low_normal.9.png",
+        "source": "/Users/ducnguyen46/.gradle/caches/transforms-2/files-2.1/da310b12d325959a2e8cfc466fbff441/core-1.1.0/res/drawable-xhdpi-v4/notification_bg_low_normal.9.png"
+    },
+    {
+        "merged": "/Volumes/macDATA/HOCTAP/Bocote/Flutter/yoga2/build/video_player/intermediates/res/merged/release/drawable-xhdpi-v4/notification_bg_normal_pressed.9.png",
+        "source": "/Users/ducnguyen46/.gradle/caches/transforms-2/files-2.1/da310b12d325959a2e8cfc466fbff441/core-1.1.0/res/drawable-xhdpi-v4/notification_bg_normal_pressed.9.png"
+    },
+    {
+        "merged": "/Volumes/macDATA/HOCTAP/Bocote/Flutter/yoga2/build/video_player/intermediates/res/merged/release/drawable-xhdpi-v4/notification_bg_normal.9.png",
+        "source": "/Users/ducnguyen46/.gradle/caches/transforms-2/files-2.1/da310b12d325959a2e8cfc466fbff441/core-1.1.0/res/drawable-xhdpi-v4/notification_bg_normal.9.png"
+    }
+]
