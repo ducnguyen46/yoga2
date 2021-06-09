@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:yoga/constants/app_color.dart';
 import 'package:yoga/constants/app_path.dart';
 
 class SettingSelection extends StatelessWidget {
@@ -22,9 +23,13 @@ class SettingSelection extends StatelessWidget {
       child: GestureDetector(
         onTap: onTap,
         child: Container(
-          // color: Colors.amber,
+          decoration: BoxDecoration(
+            color: AppColor.grayBlue.withOpacity(0.2),
+            borderRadius: BorderRadius.circular(10),
+          ),
           padding: EdgeInsets.symmetric(
             vertical: 8,
+            horizontal: 8,
           ),
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,

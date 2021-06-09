@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:yoga/constants/app_color.dart';
+import 'package:yoga/modules/setting/screen/about_us.dart';
 import 'package:yoga/modules/setting/screen/language_setting.dart';
+import 'package:yoga/modules/setting/screen/service_setting.dart';
 import 'package:yoga/modules/setting/widgets/setting_select.dart';
 import 'package:yoga/modules/setting/widgets/switch_button.dart';
 
@@ -96,30 +98,38 @@ class _SettingScreenState extends State<SettingScreen> {
                 ),
               ),
               SettingSelection(
-                  settingName: "Language",
-                  onTap: () {
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                        builder: (_) => LanguageSetting(),
-                      ),
-                    );
-                  }),
+                settingName: "Language",
+                onTap: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (_) => LanguageSetting(),
+                    ),
+                  );
+                },
+              ),
               SettingSelection(
-                  settingName: "About us",
-                  onTap: () {
-                    print("Ab");
-                  }),
+                settingName: "About us",
+                onTap: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (_) => AboutUsSetting(),
+                    ),
+                  );
+                },
+              ),
               SettingSelection(
-                  settingName: "Privacy policy",
-                  onTap: () {
-                    print("Pr");
-                  }),
-              SettingSelection(
-                  settingName: "Terms and conditions",
-                  onTap: () {
-                    print("Ter");
-                  }),
+                settingName: "Privacy policy",
+                onTap: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (_) => ServiceSetting(),
+                    ),
+                  );
+                },
+              ),
             ],
           ),
         )
