@@ -2,15 +2,11 @@
 
 A new Flutter project.
 
-## Getting Started
+# Screen shot
+!(https://github.com/ducnguyen46/yoga2/blob/master/assets/screenshot/1_home_screen.png)
+!(https://github.com/ducnguyen46/yoga2/blob/master/assets/screenshot/2_progress_screen.png)
+!(https://github.com/ducnguyen46/yoga2/blob/master/assets/screenshot/3_like_screen.png)
+!(https://github.com/ducnguyen46/yoga2/blob/master/assets/screenshot/4_exercise_list_screen.png)
+!(https://github.com/ducnguyen46/yoga2/blob/master/assets/screenshot/5_exercise_info.png)
+!(https://github.com/ducnguyen46/yoga2/blob/master/assets/screenshot/6_exercise_screen.png)
 
-This project is a starting point for a Flutter application.
-
-A few resources to get you started if this is your first Flutter project:
-
-- [Lab: Write your first Flutter app](https://flutter.dev/docs/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://flutter.dev/docs/cookbook)
-
-For help getting started with Flutter, view our
-[online documentation](https://flutter.dev/docs), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
