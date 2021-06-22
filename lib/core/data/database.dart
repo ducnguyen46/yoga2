@@ -169,7 +169,7 @@ class DatabaseProvider {
   Future<List<Exercise>> getExerciseFromCategory(Category category) async {
     var db = await database;
     var listExerciseCategory = await db.query("exercise",
-        where: '"namefit" = ?', whereArgs: [category.namefit], limit: 4);
+        where: '"namefit" = ?', whereArgs: [category.namefit]);
 
     List<Exercise> exercises =
         listExerciseCategory.map((json) => Exercise().fromJson(json)).toList();
