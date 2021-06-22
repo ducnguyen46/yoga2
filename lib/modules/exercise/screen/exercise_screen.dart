@@ -161,7 +161,7 @@ class _ExerciseScreenState extends State<ExerciseScreen> {
                         CircularPercentIndicator(
                           radius: 200,
                           lineWidth: 20,
-                          percent: (context.read<Countdown>().getTime / 10),
+                          percent: (context.read<Countdown>().getTime / 30),
                           backgroundColor:
                               AppColor.circleGradient2.withOpacity(0.2),
                           progressColor: AppColor.circleGradient1,

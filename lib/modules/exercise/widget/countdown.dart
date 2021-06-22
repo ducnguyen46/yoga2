@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 
 class Countdown with ChangeNotifier {
-  static int _time = 6;
+  static int _time = 30;
   var _currentTime = _time;
-  var _excercise = 2;
+  var _excercise = 0;
   var _index = 0;
 
   int get getTime {
