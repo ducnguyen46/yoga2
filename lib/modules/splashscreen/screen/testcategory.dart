@@ -11,10 +11,11 @@ class TestCategory extends StatelessWidget {
           AsyncSnapshot<List<Category>> responseListCategory) {
         if (responseListCategory.hasData) {
           return ListView.builder(
-              itemCount: responseListCategory.data.length,
+              itemCount: responseListCategory.data?.length,
               itemBuilder: (context, index) {
                 return ListTile(
-                  title: Text(responseListCategory.data[index].name.toString()),
+                  title:
+                      Text(responseListCategory.data![index].name.toString()),
                 );
               });
         } else {

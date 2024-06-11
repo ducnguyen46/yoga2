@@ -1,5 +1,4 @@
 import 'dart:io';
-import 'dart:typed_data';
 
 import 'package:flutter/services.dart';
 import 'package:path/path.dart';
@@ -15,14 +14,14 @@ class DatabaseProvider {
   DatabaseProvider.init();
   static final DatabaseProvider db = DatabaseProvider.init();
   //
-  static Database _database;
+  Database? _database;
 
   Future<Database> get database async {
     //if null - create new and !null return this
     if (_database == null) {
       _database = await initDB();
     }
-    return _database;
+    return _database!;
   }
 
   initDB() async {
@@ -90,7 +89,7 @@ class DatabaseProvider {
     var db = await database;
     var listMapCategory = await db.query("category");
     List<Category> categories =
-        listMapCategory.map((json) => Category().fromJson(json)).toList();
+        listMapCategory.map((json) => Category.fromJson(json)).toList();
 
     return categories;
   }
@@ -113,7 +112,7 @@ class DatabaseProvider {
     // var listMapCategory =
     //     await db.rawQuery('SELECT * FROM "category" WHERE type = "popular"');
     List<Category> categories =
-        listMapCategory.map((json) => Category().fromJson(json)).toList();
+        listMapCategory.map((json) => Category.fromJson(json)).toList();
 
     return categories;
   }
@@ -157,7 +156,7 @@ class DatabaseProvider {
         await db.query("category", where: 'mark = ?', whereArgs: [1]);
 
     List<Category> categories =
-        listMapCategory.map((json) => Category().fromJson(json)).toList();
+        listMapCategory.map((json) => Category.fromJson(json)).toList();
 
     return categories;
   }
@@ -172,7 +171,7 @@ class DatabaseProvider {
         where: '"namefit" = ?', whereArgs: [category.namefit]);
 
     List<Exercise> exercises =
-        listExerciseCategory.map((json) => Exercise().fromJson(json)).toList();
+        listExerciseCategory.map((json) => Exercise.fromJson(json)).toList();
 
     return exercises;
   }
@@ -189,7 +188,7 @@ class DatabaseProvider {
     );
 
     List<Weight> weights =
-        listWeight.map((json) => Weight().fromJson(json)).toList();
+        listWeight.map((json) => Weight.fromJson(json)).toList();
     return weights;
   }
 
@@ -209,19 +208,19 @@ class DatabaseProvider {
 
     // lấy ra được list weight, nếu length > 0 => đã tồn tại
     List<Weight> listWeightAvailabe =
-        listWeight.map((json) => Weight().fromJson(json)).toList();
+        listWeight.map((json) => Weight.fromJson(json)).toList();
 
     int result;
     // đã tồn tại
     if (listWeightAvailabe.length > 0) {
-      int id = listWeightAvailabe[0].id;
+      int id = listWeightAvailabe[0].id!;
       //update
-      result = await db.update("weight", Weight().toJsonWoId(w),
-          where: "id = ?", whereArgs: [id]);
+      result = await db
+          .update("weight", w.toJsonWoId(), where: "id = ?", whereArgs: [id]);
     }
     // chưa tồn tại thì thêm mới với id auto increment
     else {
-      result = await db.insert("weight", Weight().toJsonWoId(w));
+      result = await db.insert("weight", w.toJsonWoId());
     }
     return (result == 1) ? true : false;
   }
@@ -282,9 +281,8 @@ class DatabaseProvider {
     //if have EC with 'namefit'
     var queryECInDB = await db.query("exercise_completed",
         where: "namefit = ?", whereArgs: [exerciseCompleted.namefit]);
-    List<ExerciseCompleted> listECInFB = queryECInDB
-        .map((json) => ExerciseCompleted.init().fromJSON(json))
-        .toList();
+    List<ExerciseCompleted> listECInFB =
+        queryECInDB.map((json) => ExerciseCompleted.fromJSON(json)).toList();
 
     if (listECInFB.isNotEmpty) {
       ExerciseCompleted eCInDB = listECInFB[0];
@@ -297,7 +295,7 @@ class DatabaseProvider {
 
       var updateEC = await db.update(
         "exercise_completed",
-        ExerciseCompleted.init().toJsonWoId(eCtoUpdate),
+        eCtoUpdate.toJsonWoId(),
         where: "id = ?",
         whereArgs: [eCtoUpdate.id],
       );
@@ -306,7 +304,7 @@ class DatabaseProvider {
     } else {
       var insertEC = await db.insert(
         "exercise_completed",
-        ExerciseCompleted.init().toJsonWoId(exerciseCompleted),
+        exerciseCompleted.toJsonWoId(),
       );
 
       print(insertEC);
@@ -323,7 +321,7 @@ class DatabaseProvider {
     // var queryCount = await db
     //     .rawQuery("SELECT COUNT(namefit) as count FROM exercise_completed");
 
-    int count = queryCount.map((json) => json["count"]).toList()[0];
+    int count = queryCount.map((json) => json["count"]).toList()[0] as int;
 
     return count;
   }
@@ -334,7 +332,7 @@ class DatabaseProvider {
     var queryCount = await db.query("exercise_completed",
         columns: ["SUM(exercise_count) as exercise"]);
 
-    int count = queryCount.map((json) => json["exercise"]).toList()[0];
+    int count = queryCount.map((json) => json["exercise"]).toList()[0] as int;
 
     return count;
   }
@@ -345,7 +343,8 @@ class DatabaseProvider {
     var queryCount = await db.query("exercise_completed",
         columns: ["SUM(time_count) as time_count"]);
 
-    double count = queryCount.map((json) => json["time_count"]).toList()[0];
+    double count =
+        queryCount.map((json) => json["time_count"]).toList()[0] as double;
 
     return count;
   }

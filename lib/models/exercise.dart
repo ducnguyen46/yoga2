@@ -6,14 +6,14 @@ class Exercise {
   String namefit;
 
   Exercise({
-    this.id,
-    this.name,
-    this.image,
-    this.description,
-    this.namefit,
+    required this.id,
+    required this.name,
+    required this.image,
+    required this.description,
+    required this.namefit,
   });
 
-  Exercise fromJson(Map<String, dynamic> json) {
+  factory Exercise.fromJson(Map<String, dynamic> json) {
     return Exercise(
       id: json["id"] as int,
       name: json["name"] as String,

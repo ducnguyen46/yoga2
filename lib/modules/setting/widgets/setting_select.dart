@@ -5,12 +5,12 @@ import 'package:yoga/constants/app_path.dart';
 
 class SettingSelection extends StatelessWidget {
   final String settingName;
-  final Function onTap;
+  final Function()? onTap;
 
   const SettingSelection({
-    Key key,
-    @required this.settingName,
-    @required this.onTap,
+    Key? key,
+    required this.settingName,
+    required this.onTap,
   }) : super(key: key);
 
   @override

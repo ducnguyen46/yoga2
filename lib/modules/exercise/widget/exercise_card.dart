@@ -8,9 +8,9 @@ import '../../dialog/dialog_exercise.dart';
 
 class ExerciseCard extends StatelessWidget {
   const ExerciseCard({
-    Key key,
-    @required this.size,
-    @required this.exercise,
+    Key? key,
+    required this.size,
+    required this.exercise,
   }) : super(key: key);
 
   final Exercise exercise;

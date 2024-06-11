@@ -6,7 +6,8 @@ class ListYogaCategoryType extends StatefulWidget {
   final String type;
   final List<Category> listCategory;
 
-  const ListYogaCategoryType({Key key, this.type, this.listCategory})
+  const ListYogaCategoryType(
+      {Key? key, required this.type, required this.listCategory})
       : super(key: key);
 
   @override
@@ -14,13 +15,13 @@ class ListYogaCategoryType extends StatefulWidget {
 }
 
 class _ListYogaCategoryTypeState extends State<ListYogaCategoryType> {
-  ScrollController _controller;
+  late ScrollController _controller;
 
   @override
   void initState() {
     _controller = ScrollController();
     _controller.addListener(() {
-      print('Offset: ' + _controller.offset.toString());
+      // print('Offset: ' + _controller.offset.toString());
     });
     super.initState();
   }
@@ -30,7 +31,6 @@ class _ListYogaCategoryTypeState extends State<ListYogaCategoryType> {
     var size = MediaQuery.of(context).size;
 
     return ListYogaCategory(
-      size: size,
       controller: _controller,
       listCategory: widget.listCategory,
       type: widget.type,
@@ -40,17 +40,15 @@ class _ListYogaCategoryTypeState extends State<ListYogaCategoryType> {
 
 class ListYogaCategory extends StatelessWidget {
   const ListYogaCategory({
-    Key key,
-    @required this.size,
-    @required ScrollController controller,
-    @required List<Category> listCategory,
-    @required String type,
+    Key? key,
+    required ScrollController controller,
+    required List<Category> listCategory,
+    required String type,
   })  : _controller = controller,
         _listCategory = listCategory,
         _type = type,
         super(key: key);
 
-  final Size size;
   final ScrollController _controller;
   final List<Category> _listCategory;
   final String _type;
@@ -62,7 +60,7 @@ class ListYogaCategory extends StatelessWidget {
       mainAxisAlignment: MainAxisAlignment.start,
       children: [
         Padding(
-          padding: const EdgeInsets.only(left: 25),
+          padding: const EdgeInsets.only(left: 25, right: 25),
           child: Text(
             'Yoga ${getTypeCategory(_type)}',
             style: TextStyle(
@@ -74,26 +72,24 @@ class ListYogaCategory extends StatelessWidget {
           ),
         ),
         Expanded(
-          child: Container(
-            margin: EdgeInsets.only(top: 12),
-            width: size.width,
-            // color: Colors.blueAccent,
-            child: ListView.builder(
-              controller: _controller,
-              scrollDirection: Axis.horizontal,
-              itemCount: _listCategory.length + 1,
-              itemBuilder: (context, index) {
-                if (index == _listCategory.length) print(index);
-                return index < _listCategory.length
-                    ? YogaCategoryCard(
-                        category: _listCategory[index],
-                      )
-                    : Container(
-                        height: 263,
-                        width: 204 / 2,
-                      );
-              },
+          child: ListView.separated(
+            padding: EdgeInsets.symmetric(
+              vertical: 8,
+              horizontal: 25,
             ),
+            controller: _controller,
+            scrollDirection: Axis.horizontal,
+            itemCount: _listCategory.length,
+            itemBuilder: (context, index) {
+              return YogaCategoryCard(
+                category: _listCategory[index],
+              );
+            },
+            separatorBuilder: (BuildContext context, int index) {
+              return Container(
+                width: 16,
+              );
+            },
           ),
         )
       ],

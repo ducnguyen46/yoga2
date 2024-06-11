@@ -7,22 +7,18 @@ import 'package:yoga/core/data/database.dart';
 import 'package:yoga/models/catagory.dart';
 import 'package:yoga/models/exercise.dart';
 import 'package:yoga/models/exercise_completed.dart';
-import 'package:yoga/models/exercise_completed.dart';
 import 'package:yoga/modules/exercise/widget/countdown.dart';
 import 'package:yoga/modules/exercise/widget/video_player.dart';
 import 'package:percent_indicator/circular_percent_indicator.dart';
-
-import '../../../constants/app_path.dart';
-import '../widget/video_player.dart';
 
 class ExerciseScreen extends StatefulWidget {
   final Category category;
   final List<Exercise> listExercise;
 
   const ExerciseScreen({
-    Key key,
-    @required this.category,
-    @required this.listExercise,
+    Key? key,
+    required this.category,
+    required this.listExercise,
   }) : super(key: key);
 
   @override
@@ -91,7 +87,6 @@ class _ExerciseScreenState extends State<ExerciseScreen> {
                               padding: const EdgeInsets.all(9.0),
                               child: SvgPicture.asset(
                                 AppPath.toAssetsIcons + "corner-up-left.svg",
-                                color: AppColor.blueDark,
                               ),
                             ),
                           ),
@@ -102,6 +97,25 @@ class _ExerciseScreenState extends State<ExerciseScreen> {
                   Expanded(
                     child: ListView(
                       children: [
+                        CircularPercentIndicator(
+                          radius: 60,
+                          lineWidth: 20,
+                          percent: (context.read<Countdown>().getTime / 30),
+                          backgroundColor:
+                          AppColor.circleGradient2.withOpacity(0.2),
+                          progressColor: AppColor.circleGradient1,
+                          circularStrokeCap: CircularStrokeCap.round,
+                          center: Text(
+                            (context.read<Countdown>().getTime < 10)
+                                ? "0${context.watch<Countdown>().getTime}"
+                                : "${context.watch<Countdown>().getTime}",
+                            style: TextStyle(
+                              color: AppColor.blueDark,
+                              fontSize: 36,
+                              fontWeight: FontWeight.w500,
+                            ),
+                          ),
+                        ),
                         Padding(
                           padding: const EdgeInsets.only(
                             left: 24,
@@ -158,25 +172,6 @@ class _ExerciseScreenState extends State<ExerciseScreen> {
                             ],
                           ),
                         ),
-                        CircularPercentIndicator(
-                          radius: 200,
-                          lineWidth: 20,
-                          percent: (context.read<Countdown>().getTime / 30),
-                          backgroundColor:
-                              AppColor.circleGradient2.withOpacity(0.2),
-                          progressColor: AppColor.circleGradient1,
-                          circularStrokeCap: CircularStrokeCap.round,
-                          center: Text(
-                            (context.read<Countdown>().getTime < 10)
-                                ? "0${context.watch<Countdown>().getTime}"
-                                : "${context.watch<Countdown>().getTime}",
-                            style: TextStyle(
-                              color: AppColor.blueDark,
-                              fontSize: 36,
-                              fontWeight: FontWeight.w500,
-                            ),
-                          ),
-                        ),
                       ],
                     ),
                   ),
@@ -192,16 +187,14 @@ class _ExerciseScreenState extends State<ExerciseScreen> {
                       bottom: 25,
                       child: InkWell(
                         onTap: () async {
-                          ExerciseCompleted excerciseCompleted =
-                              ExerciseCompleted.init();
-                          excerciseCompleted.namefit = widget.category.namefit;
-                          excerciseCompleted.timeCount =
-                              widget.category.count / 2;
-                          excerciseCompleted.exerciseCount =
-                              widget.category.count;
+                          ExerciseCompleted exerciseCompleted =
+                              ExerciseCompleted(
+                                  namefit: widget.category.namefit,
+                                  exerciseCount: widget.category.count,
+                                  timeCount: widget.category.count / 2);
 
                           await DatabaseProvider.db
-                              .addUpdateExcerciseCompleted(excerciseCompleted);
+                              .addUpdateExcerciseCompleted(exerciseCompleted);
 
                           Navigator.pop(context);
                         },

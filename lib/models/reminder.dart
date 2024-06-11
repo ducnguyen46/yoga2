@@ -6,11 +6,11 @@ class Reminder {
   int enable;
 
   Reminder({
-    this.id,
-    this.hour,
-    this.minutes,
-    this.repeat,
-    this.enable,
+    required this.id,
+    required this.hour,
+    required this.minutes,
+    required this.repeat,
+    required this.enable,
   });
 
   Reminder fromJson(Map<String, dynamic> json) {

@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:intl/intl.dart';
 import 'package:table_calendar/table_calendar.dart';
 import 'package:yoga/constants/app_color.dart';
@@ -22,7 +21,7 @@ class _DialogAddWeightState extends State<DialogAddWeight> {
   bool _selectLb = false;
 
   TextEditingController _weightController = TextEditingController();
-  FocusNode _focusWeight;
+  late FocusNode _focusWeight;
   static const String regex = r"^([1-9][0-9]*)(\.?)([0-9]*)$";
 
   void _addWeightCompleted(String value) {

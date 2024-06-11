@@ -16,8 +16,6 @@ class _LineChartWeightState extends State<LineChartWeight> {
     AppColor.grayBlue.withOpacity(0.7),
   ];
 
-  double maxWeight;
-
   @override
   void initState() {
     super.initState();
@@ -28,11 +26,10 @@ class _LineChartWeightState extends State<LineChartWeight> {
       future: DatabaseProvider.db.getMaxWeight(),
       builder: (BuildContext context, AsyncSnapshot<double> snapshot) {
         if (snapshot.hasData) {
-          maxWeight = snapshot.data;
-          maxWeight ??= 0;
+          double maxWeight = snapshot.data ?? 0;
           print(maxWeight);
         }
-        return;
+        return Container();
       },
     );
   }
@@ -48,10 +45,10 @@ class _LineChartWeightState extends State<LineChartWeight> {
           // get 14 weight DESC
           //
 
-          if (snapshot.data.length > 14) {
-            listAllWeight = snapshot.data.sublist(0, 14).reversed.toList();
+          if (snapshot.data!.length > 14) {
+            listAllWeight = snapshot.data!.sublist(0, 14).reversed.toList();
           } else {
-            listAllWeight = snapshot.data.reversed.toList();
+            listAllWeight = snapshot.data!.reversed.toList();
           }
 
           return Padding(
@@ -68,7 +65,7 @@ class _LineChartWeightState extends State<LineChartWeight> {
                   LineChartData(
                     //data range
                     minX: 0,
-                    maxX: double.parse("${snapshot.data.length - 1}"),
+                    maxX: double.parse("${snapshot.data!.length - 1}"),
                     minY: 0,
 
                     borderData: FlBorderData(
@@ -84,37 +81,41 @@ class _LineChartWeightState extends State<LineChartWeight> {
 
                     titlesData: FlTitlesData(
                       show: true,
-                      bottomTitles: SideTitles(
-                        showTitles: true,
-                        reservedSize: 22,
-                        getTextStyles: (value) => const TextStyle(
-                          color: Color(0xFF7C7D80),
-                          fontWeight: FontWeight.w400,
-                          fontSize: 11,
+                      bottomTitles: AxisTitles(
+                        sideTitles: SideTitles(
+                          showTitles: true,
+                          reservedSize: 22,
+                          // getTextStyles: (value) => const TextStyle(
+                          //   color: Color(0xFF7C7D80),
+                          //   fontWeight: FontWeight.w400,
+                          //   fontSize: 11,
+                          // ),
+                          // showTitles: (value) {
+                          //   String date =
+                          //       "${listAllWeight[value.toInt()].date}/${listAllWeight[value.toInt()].month}";
+                          //   return date;
+                          // },
+                          // margin: 8,
                         ),
-                        getTitles: (value) {
-                          String date =
-                              "${listAllWeight[value.toInt()].date}/${listAllWeight[value.toInt()].month}";
-                          return date;
-                        },
-                        margin: 8,
                       ),
-                      leftTitles: SideTitles(
-                        showTitles: true,
-                        getTextStyles: (value) => const TextStyle(
-                          color: Color(0xFF7C7D80),
-                          fontWeight: FontWeight.w400,
-                          fontSize: 11,
+                      leftTitles: AxisTitles(
+                        sideTitles: SideTitles(
+                          showTitles: true,
+                          // getTextStyles: (value) => const TextStyle(
+                          //   color: Color(0xFF7C7D80),
+                          //   fontWeight: FontWeight.w400,
+                          //   fontSize: 11,
+                          // ),
+                          // showTitles: (weight) {
+                          //   // double weight = listAllWeight[value.toInt()].weight;
+                          //   if (weight % 10 == 0.0) {
+                          //     return "$weight";
+                          //   } else
+                          //     return "";
+                          // },
+                          reservedSize: 28,
+                          // margin: 12,
                         ),
-                        getTitles: (weight) {
-                          // double weight = listAllWeight[value.toInt()].weight;
-                          if (weight % 10 == 0.0) {
-                            return "$weight";
-                          } else
-                            return "";
-                        },
-                        reservedSize: 28,
-                        margin: 12,
                       ),
                     ),
                     //line data
@@ -125,7 +126,7 @@ class _LineChartWeightState extends State<LineChartWeight> {
                             FlSpot(double.parse("$i"), listAllWeight[i].weight)
                         ],
                         isCurved: true,
-                        colors: [AppColor.grayBlue],
+                        color: AppColor.grayBlue,
                         barWidth: 2,
                         isStrokeCapRound: true,
                         dotData: FlDotData(
@@ -133,7 +134,7 @@ class _LineChartWeightState extends State<LineChartWeight> {
                         ),
                         belowBarData: BarAreaData(
                           show: true,
-                          colors: gradientColors,
+                          color: AppColor.grayBlue,
                         ),
                       ),
                     ],

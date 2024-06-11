@@ -9,10 +9,10 @@ class DialogAlert extends StatelessWidget {
   final String subTitle;
 
   const DialogAlert({
-    Key key,
-    @required this.title,
-    @required this.subTitle,
-    @required this.isSuccess,
+    Key? key,
+    required this.title,
+    required this.subTitle,
+    required this.isSuccess,
   }) : super(key: key);
 
   @override

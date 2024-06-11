@@ -5,7 +5,7 @@ import 'package:yoga/modules/dashboard/widgets/list_yoga_category_type.dart';
 
 class HomeScreen extends StatefulWidget {
   HomeScreen({
-    Key key,
+    Key? key,
   }) : super(key: key);
 
   @override
@@ -13,7 +13,7 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
-  Size size;
+  late Size size;
 
   @override
   Widget build(BuildContext context) {
@@ -62,7 +62,7 @@ class _HomeScreenState extends State<HomeScreen> {
             builder: (context, listType) {
               if (listType.hasData) {
                 // voi moi mot type, lay ra cac category
-                List<String> list = listType.data as List;
+                List<String> list = listType.data!;
                 return ListView.builder(
                   itemCount: list.length,
                   itemBuilder: (context, index) {
@@ -73,12 +73,12 @@ class _HomeScreenState extends State<HomeScreen> {
                         if (listCategoryByType.hasData) {
                           //truyen vao listCategory
                           return Container(
-                            height: 300,
+                            height: 309,
                             width: size.width,
                             margin: EdgeInsets.only(top: 40),
                             child: ListYogaCategoryType(
                               type: list[index],
-                              listCategory: listCategoryByType.data,
+                              listCategory: listCategoryByType.data!,
                             ),
                           );
                         } else {

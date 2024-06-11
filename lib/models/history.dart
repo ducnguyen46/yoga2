@@ -6,11 +6,11 @@ class History {
   int exerciseCount;
 
   History({
-    this.id,
-    this.date,
-    this.calor,
-    this.time,
-    this.exerciseCount,
+    required this.id,
+    required this.date,
+    required this.calor,
+    required this.time,
+    required this.exerciseCount,
   });
 
   History fromJson(Map<String, dynamic> json) {

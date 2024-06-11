@@ -8,8 +8,8 @@ class ExerciseVideoPlayer extends StatefulWidget {
   final String videoName;
 
   ExerciseVideoPlayer({
-    Key key,
-    @required this.videoName,
+    Key? key,
+    required this.videoName,
   }) : super(key: key);
 
   @override
@@ -17,7 +17,7 @@ class ExerciseVideoPlayer extends StatefulWidget {
 }
 
 class _ExerciseVideoPlayerState extends State<ExerciseVideoPlayer> {
-  VideoPlayerController _videoPlayerController;
+  late VideoPlayerController _videoPlayerController;
 
   _videoPlayerSetting() async {
     final _vdController = VideoPlayerController.asset(
@@ -28,7 +28,6 @@ class _ExerciseVideoPlayerState extends State<ExerciseVideoPlayer> {
     _vdController.setLooping(true);
     _vdController.play();
 
-    final old = _videoPlayerController;
     _videoPlayerController = _vdController;
 
     // if (old != null) {

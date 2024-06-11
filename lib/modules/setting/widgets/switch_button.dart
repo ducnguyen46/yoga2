@@ -6,9 +6,9 @@ class SwitchButton extends StatefulWidget {
   final ValueChanged<bool> onChanged;
 
   const SwitchButton({
-    Key key,
-    @required this.enable,
-    @required this.onChanged,
+    Key? key,
+    required this.enable,
+    required this.onChanged,
   }) : super(key: key);
 
   @override
@@ -18,8 +18,8 @@ class SwitchButton extends StatefulWidget {
 class _SwitchButtonState extends State<SwitchButton>
     with SingleTickerProviderStateMixin {
   Duration _duration = Duration(milliseconds: 200);
-  AnimationController _animationController;
-  Animation _switchAnimation;
+  late AnimationController _animationController;
+  late Animation _switchAnimation;
 
   @override
   void initState() {

@@ -10,7 +10,7 @@ class BackgroundMain extends StatelessWidget {
 
 class Background extends StatelessWidget {
   const Background({
-    Key key,
+    Key? key,
   }) : super(key: key);
 
   @override

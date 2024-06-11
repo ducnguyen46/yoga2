@@ -7,7 +7,7 @@ import 'package:yoga/models/exercise.dart';
 class DialogExercise extends StatelessWidget {
   final Exercise exercise;
 
-  DialogExercise({Key key, @required this.exercise}) : super(key: key);
+  DialogExercise({Key? key, required this.exercise}) : super(key: key);
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
@@ -50,9 +50,9 @@ class DialogExercise extends StatelessWidget {
 
 class DialogExerciseInfo extends StatelessWidget {
   const DialogExerciseInfo({
-    Key key,
-    @required this.widthDialog,
-    @required this.exercise,
+    Key? key,
+    required this.widthDialog,
+    required this.exercise,
   }) : super(key: key);
 
   final double widthDialog;

@@ -10,7 +10,7 @@ class VideoPlayerDemo extends StatefulWidget {
 }
 
 class _VideoPlayerDemoState extends State<VideoPlayerDemo> {
-  VideoPlayerController _videoPlayerController;
+  late VideoPlayerController _videoPlayerController;
 
   _videoPlayerSetting() async {
     final _vdController =

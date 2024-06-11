@@ -17,7 +17,7 @@ class YogaComing extends StatelessWidget {
               return CircularProgressIndicator();
             default:
               if (!snapshot.hasError) {
-                return snapshot.data.getBool("Opened") != null
+                return snapshot.data?.getBool("Opened") != null
                     ? DashboardScreen()
                     : WelcomeScreen();
               } else {

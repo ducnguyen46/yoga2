@@ -49,16 +49,16 @@ class ExerciseLikedPage extends StatelessWidget {
                   gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
                     crossAxisCount: gridCol,
                     mainAxisSpacing: 24,
-                    crossAxisSpacing: 10,
+                    crossAxisSpacing: 24,
                     childAspectRatio: 0.75,
                   ),
                   delegate: SliverChildBuilderDelegate(
                     (context, index) {
                       return YogaCategoryCardGridView(
-                        category: categories.data[index],
+                        category: categories.data![index],
                       );
                     },
-                    childCount: categories.data.length,
+                    childCount: categories.data?.length,
                   ),
                 ),
               ],

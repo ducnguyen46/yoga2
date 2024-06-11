@@ -1,4 +1,0 @@
-#Thu May 13 15:12:05 ICT 2021
-base.0=/Volumes/macDATA/HOCTAP/Bocote/Flutter/yoga2/build/app/intermediates/dex/release/minifyReleaseWithR8/classes.dex
-path.0=classes.dex
-renamed.0=classes.dex

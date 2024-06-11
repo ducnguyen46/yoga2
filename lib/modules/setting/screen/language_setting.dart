@@ -158,10 +158,10 @@ class LanguageSelect extends StatelessWidget {
   final int tabSelect;
 
   const LanguageSelect({
-    Key key,
-    @required this.language,
-    @required this.tabAt,
-    @required this.tabSelect,
+    Key? key,
+    required this.language,
+    required this.tabAt,
+    required this.tabSelect,
   }) : super(key: key);
 
   @override

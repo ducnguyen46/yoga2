@@ -1,5 +1,5 @@
 class Weight {
-  int id;
+  int? id;
   double weight;
   int date;
   int month;
@@ -7,13 +7,13 @@ class Weight {
 
   Weight({
     this.id,
-    this.weight,
-    this.date,
-    this.month,
-    this.year,
+    required this.weight,
+    required this.date,
+    required this.month,
+    required this.year,
   });
 
-  Weight fromJson(Map<String, dynamic> json) {
+  factory Weight.fromJson(Map<String, dynamic> json) {
     return Weight(
       id: json["id"] as int,
       weight: json["weight"] as double,
@@ -23,22 +23,22 @@ class Weight {
     );
   }
 
-  Map<String, dynamic> toJson(Weight weight) {
+  Map<String, dynamic> toJson() {
     return <String, dynamic>{
-      "id": weight.id,
-      "weight": weight.weight,
-      "date": weight.date,
-      "month": weight.month,
-      "year": weight.year,
+      "id": id,
+      "weight": weight,
+      "date": date,
+      "month": month,
+      "year": year,
     };
   }
 
-  Map<String, dynamic> toJsonWoId(Weight weight) {
+  Map<String, dynamic> toJsonWoId() {
     return <String, dynamic>{
-      "weight": weight.weight,
-      "date": weight.date,
-      "month": weight.month,
-      "year": weight.year,
+      "weight": weight,
+      "date": date,
+      "month": month,
+      "year": year,
     };
   }
 }

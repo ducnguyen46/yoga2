@@ -1,21 +1,17 @@
-import 'package:flutter/material.dart';
-
 class ExerciseCompleted {
-  int id;
+  int? id;
   String namefit;
   int exerciseCount;
   double timeCount;
 
   ExerciseCompleted({
     this.id,
-    @required this.namefit,
-    @required this.exerciseCount,
-    @required this.timeCount,
+    required this.namefit,
+    required this.exerciseCount,
+    required this.timeCount,
   });
 
-  ExerciseCompleted.init();
-
-  ExerciseCompleted fromJSON(Map<String, dynamic> json) {
+  factory ExerciseCompleted.fromJSON(Map<String, dynamic> json) {
     return ExerciseCompleted(
       id: json["id"],
       namefit: json["namefit"],
@@ -24,11 +20,11 @@ class ExerciseCompleted {
     );
   }
 
-  Map<String, dynamic> toJsonWoId(ExerciseCompleted excerciseCompleted) {
+  Map<String, dynamic> toJsonWoId() {
     return <String, dynamic>{
-      "namefit": excerciseCompleted.namefit,
-      "exercise_count": excerciseCompleted.exerciseCount,
-      "time_count": excerciseCompleted.timeCount,
+      "namefit": namefit,
+      "exercise_count": exerciseCount,
+      "time_count": timeCount,
     };
   }
 }

@@ -4,7 +4,7 @@ import 'package:yoga/constants/app_color.dart';
 import 'package:yoga/modules/rountine/widgets/like_exercise_page.dart';
 import 'package:yoga/modules/rountine/widgets/rountine_page.dart';
 
-class RountineScreen extends StatelessWidget {
+class RoutineScreen extends StatelessWidget {
   final PageController _pageController = PageController();
 
   @override
@@ -33,7 +33,7 @@ class RountineScreen extends StatelessWidget {
                     ),
                   ),
                   Text(
-                    'Your Rountines and your exercises are here!',
+                    'Your Routines and your exercises are here!',
                     style: TextStyle(
                       fontFamily: 'GT',
                       fontSize: 17,
@@ -68,7 +68,7 @@ class RountineScreen extends StatelessWidget {
           child: PageView(
             controller: _pageController,
             children: [
-              RountinePage(),
+              RoutinePage(),
               ExerciseLikedPage(),
             ],
           ),

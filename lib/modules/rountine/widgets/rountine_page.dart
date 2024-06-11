@@ -3,7 +3,7 @@ import 'package:yoga/core/data/database.dart';
 import 'package:yoga/models/catagory.dart';
 import 'package:yoga/modules/rountine/widgets/yoga_category_card_grid.dart';
 
-class RountinePage extends StatelessWidget {
+class RoutinePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
@@ -51,16 +51,16 @@ class RountinePage extends StatelessWidget {
                   gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
                     crossAxisCount: gridCol,
                     mainAxisSpacing: 24,
-                    crossAxisSpacing: 10,
+                    crossAxisSpacing: 24,
                     childAspectRatio: 0.75,
                   ),
                   delegate: SliverChildBuilderDelegate(
                     (context, index) {
                       return YogaCategoryCardGridView(
-                        category: categories.data[index],
+                        category: categories.data![index],
                       );
                     },
-                    childCount: categories.data.length,
+                    childCount: categories.data?.length,
                   ),
                 ),
               ],

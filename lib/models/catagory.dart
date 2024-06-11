@@ -9,25 +9,25 @@ class Category {
   String image;
   int mark;
   String description;
-  String shortDescription; // short_description
+  String? shortDescription; // short_description
 
   Category({
-    this.id,
-    this.name,
-    this.namefit,
-    this.count,
-    this.type,
-    this.enableDelete,
-    this.lock,
-    this.image,
-    this.mark,
-    this.description,
+    required this.id,
+    required this.name,
+    required this.namefit,
+    required this.count,
+    required this.type,
+    required this.enableDelete,
+    required this.lock,
+    required this.image,
+    required this.mark,
+    required this.description,
     this.shortDescription,
   });
 
-  Category fromJson(Map<String, dynamic> json) {
+  factory Category.fromJson(Map<String, dynamic> json) {
     return Category(
-      id: json["id"] as int,
+      id: json["id"],
       name: json["name"] as String,
       namefit: json["namefit"] as String,
       count: json["count"] as int,
@@ -37,7 +37,7 @@ class Category {
       image: json["image"] as String,
       mark: json["mark"] as int,
       description: json["description"] as String,
-      shortDescription: json["short_description"] as String,
+      shortDescription: json["short_description"],
     );
   }
 }

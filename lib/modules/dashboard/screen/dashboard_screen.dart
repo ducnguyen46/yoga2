@@ -18,12 +18,12 @@ class _DashboardScreenState extends State<DashboardScreen>
   bool _showMenu = false;
   int tabActive = 0;
 
-  final Duration duration = const Duration(milliseconds: 300);
-  AnimationController _controller;
+  final Duration duration = const Duration(milliseconds: 200);
+  late AnimationController _controller;
 
   List<MenuTab> menuTabs = [
     MenuTab(
-      name: "Excercise",
+      name: "Exercise",
       iconPath: AppPath.toAssetsIcons + "home.svg",
     ),
     MenuTab(
@@ -31,7 +31,7 @@ class _DashboardScreenState extends State<DashboardScreen>
       iconPath: AppPath.toAssetsIcons + "progress.svg",
     ),
     MenuTab(
-      name: "Rountine",
+      name: "Routine",
       iconPath: AppPath.toAssetsIcons + "workout.svg",
     ),
     MenuTab(
@@ -43,7 +43,7 @@ class _DashboardScreenState extends State<DashboardScreen>
   List<Widget> screens = [
     HomeScreen(),
     ProgressScreen(),
-    RountineScreen(),
+    RoutineScreen(),
     SettingScreen(),
   ];
 
@@ -179,10 +179,10 @@ class _DashboardScreenState extends State<DashboardScreen>
 
 class MenuTabWidget extends StatelessWidget {
   MenuTabWidget({
-    Key key,
-    @required this.menuTab,
-    @required this.tabAt,
-    @required this.tabActive,
+    Key? key,
+    required this.menuTab,
+    required this.tabAt,
+    required this.tabActive,
   }) : super(key: key);
 
   final MenuTab menuTab;
@@ -246,7 +246,7 @@ class MenuTab {
   String name;
 
   MenuTab({
-    @required this.name,
-    @required this.iconPath,
+    required this.name,
+    required this.iconPath,
   });
 }

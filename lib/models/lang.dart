@@ -9,14 +9,14 @@ class Lang {
   String hl;
 
   Lang({
-    this.id,
-    this.key,
-    this.pt,
-    this.fr,
-    this.gl,
-    this.lt,
-    this.ru,
-    this.hl,
+    required this.id,
+    required this.key,
+    required this.pt,
+    required this.fr,
+    required this.gl,
+    required this.lt,
+    required this.ru,
+    required this.hl,
   });
 
   Lang fromJson(Map<String, dynamic> json) {

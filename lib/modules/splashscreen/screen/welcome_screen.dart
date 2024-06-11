@@ -14,8 +14,8 @@ class WelcomeScreen extends StatefulWidget {
 
 class _WelcomeScreenState extends State<WelcomeScreen> {
   static const String regex = r"^([1-9][0-9]*)(\.?)([0-9]*)$";
-  TextEditingController _weightController;
-  FocusNode _focusWeight;
+  late TextEditingController _weightController;
+  late FocusNode _focusWeight;
 
   bool _letgo = false;
 

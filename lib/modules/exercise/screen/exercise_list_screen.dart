@@ -6,13 +6,13 @@ import 'package:yoga/core/data/database.dart';
 import 'package:yoga/models/catagory.dart';
 import 'package:yoga/models/exercise.dart';
 import 'package:yoga/modules/exercise/screen/exercise_screen.dart';
-import 'package:yoga/modules/exercise/screen/testing.dart';
 import 'package:yoga/modules/exercise/widget/exercise_card.dart';
 
 class ExerciseListScreen extends StatefulWidget {
   final Category category;
 
-  const ExerciseListScreen({Key key, this.category}) : super(key: key);
+  const ExerciseListScreen({Key? key, required this.category})
+      : super(key: key);
   @override
   _ExerciseListScreenState createState() => _ExerciseListScreenState();
 }
@@ -238,15 +238,15 @@ class _ExerciseListScreenState extends State<ExerciseListScreen> {
                       builder: (BuildContext context,
                           AsyncSnapshot<List<Exercise>> exercises) {
                         if (exercises.hasData) {
-                          listExercise = exercises.data;
+                          listExercise = exercises.data!;
                           return Padding(
                             padding: const EdgeInsets.symmetric(horizontal: 25),
                             child: ListView.builder(
-                              itemCount: exercises.data.length,
+                              itemCount: exercises.data?.length,
                               itemBuilder: (context, index) {
                                 return ExerciseCard(
                                     size: size,
-                                    exercise: exercises.data[index]);
+                                    exercise: exercises.data![index]);
                               },
                             ),
                           );

@@ -1,5 +1,3 @@
-import 'dart:ffi';
-
 import 'package:flutter/material.dart';
 import 'package:yoga/constants/app_color.dart';
 import 'package:yoga/core/data/database.dart';
@@ -13,7 +11,7 @@ class ProgressScreen extends StatefulWidget {
 }
 
 class _ProgressScreenState extends State<ProgressScreen> {
-  Size size;
+  late Size size;
 
   List<Color> gradientColors = [
     AppColor.redOrange.withOpacity(0.05),
@@ -150,8 +148,7 @@ class _ProgressScreenState extends State<ProgressScreen> {
                           builder: (BuildContext context,
                               AsyncSnapshot<double> snapshot) {
                             if (snapshot.hasData) {
-                              double currentWeight = snapshot.data;
-                              currentWeight ??= 0;
+                              double currentWeight = snapshot.data ?? 0;
                               return Text(
                                 "$currentWeight kg",
                                 style: TextStyle(
@@ -195,8 +192,7 @@ class _ProgressScreenState extends State<ProgressScreen> {
                             builder: (BuildContext context,
                                 AsyncSnapshot<double> snapshot) {
                               if (snapshot.hasData) {
-                                double maxWeight = snapshot.data;
-                                maxWeight ??= 0;
+                                double maxWeight = snapshot.data ?? 0;
                                 return Text(
                                   "$maxWeight kg",
                                   style: TextStyle(
@@ -240,8 +236,7 @@ class _ProgressScreenState extends State<ProgressScreen> {
                           builder: (BuildContext context,
                               AsyncSnapshot<double> snapshot) {
                             if (snapshot.hasData) {
-                              double minWeight = snapshot.data;
-                              minWeight ??= 0;
+                              double minWeight = snapshot.data ?? 0;
                               return Text(
                                 "$minWeight kg",
                                 style: TextStyle(
@@ -323,7 +318,6 @@ class _ProgressScreenState extends State<ProgressScreen> {
                                     ),
                                   );
 
-                                  break;
                                 default:
                                   if (!snapshot.hasError) {
                                     return CalculateExercise(
@@ -355,7 +349,6 @@ class _ProgressScreenState extends State<ProgressScreen> {
                                     ),
                                   );
 
-                                  break;
                                 default:
                                   if (!snapshot.hasError) {
                                     return CalculateExercise(
@@ -387,7 +380,6 @@ class _ProgressScreenState extends State<ProgressScreen> {
                                     ),
                                   );
 
-                                  break;
                                 default:
                                   if (!snapshot.hasError) {
                                     return CalculateExercise(
