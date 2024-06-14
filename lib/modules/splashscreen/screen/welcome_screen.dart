@@ -3,9 +3,9 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:yoga/constants/app_color.dart';
 import 'package:yoga/constants/app_path.dart';
-import 'package:yoga/core/data/database.dart';
+import 'package:yoga/core/datasource/database_provider.dart';
 import 'package:yoga/modules/dashboard/screen/dashboard_screen.dart';
-import 'package:yoga/modules/dialog/dialog_alert.dart';
+import 'package:yoga/modules/dialogs/dialog_alert.dart';
 
 class WelcomeScreen extends StatefulWidget {
   @override

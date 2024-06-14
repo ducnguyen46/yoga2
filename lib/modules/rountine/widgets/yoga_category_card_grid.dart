@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:yoga/constants/app_color.dart';
 import 'package:yoga/constants/app_path.dart';
-import 'package:yoga/models/catagory.dart';
-import 'package:yoga/modules/exercise/screen/exercise_list_screen.dart';
+import 'package:yoga/models/category.dart';
+import 'package:yoga/modules/exercise/screen/exercises_screen.dart';
 
 class YogaCategoryCardGridView extends StatelessWidget {
   final Category category;
@@ -17,7 +17,7 @@ class YogaCategoryCardGridView extends StatelessWidget {
         Navigator.push(
           context,
           MaterialPageRoute(
-            builder: (context) => ExerciseListScreen(
+            builder: (context) => ExercisesScreen(
               category: category,
             ),
           ),
@@ -50,7 +50,6 @@ class YogaCategoryCardGridView extends StatelessWidget {
                 fit: BoxFit.cover,
               ),
             ),
-
             Padding(
               padding: const EdgeInsets.all(8.0),
               child: Column(
@@ -81,8 +80,7 @@ class YogaCategoryCardGridView extends StatelessWidget {
                         color: AppColor.purpleDecor,
                       ),
                       Padding(
-                        padding:
-                        const EdgeInsets.only(left: 7, right: 7),
+                        padding: const EdgeInsets.only(left: 7, right: 7),
                         child: Text(
                           '${category.count / 2} minutes',
                           style: TextStyle(
@@ -111,8 +109,7 @@ class YogaCategoryCardGridView extends StatelessWidget {
                         width: 20,
                       ),
                       Padding(
-                        padding:
-                        const EdgeInsets.only(left: 7, right: 7),
+                        padding: const EdgeInsets.only(left: 7, right: 7),
                         child: Text(
                           '${category.count} exercises',
                           style: TextStyle(

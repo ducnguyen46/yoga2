@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:yoga/constants/app_color.dart';
-import 'package:yoga/core/data/database.dart';
-import 'package:yoga/modules/dialog/dialog_add_weight.dart';
+import 'package:yoga/core/datasource/database_provider.dart';
+import 'package:yoga/modules/dialogs/dialog_add_weight.dart';
 import 'package:yoga/modules/progress/widget/calculate_exercise.dart';
 import 'package:yoga/modules/progress/widget/chart_weight.dart';
 

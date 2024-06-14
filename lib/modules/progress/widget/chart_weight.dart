@@ -1,7 +1,7 @@
 import 'package:fl_chart/fl_chart.dart';
 import 'package:flutter/material.dart';
 import 'package:yoga/constants/app_color.dart';
-import 'package:yoga/core/data/database.dart';
+import 'package:yoga/core/datasource/database_provider.dart';
 import 'package:yoga/models/weight.dart';
 
 class LineChartWeight extends StatefulWidget {

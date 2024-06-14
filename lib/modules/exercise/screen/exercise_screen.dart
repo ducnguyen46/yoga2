@@ -1,24 +1,24 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/svg.dart';
-import 'package:provider/provider.dart';
 import 'package:yoga/constants/app_color.dart';
 import 'package:yoga/constants/app_path.dart';
-import 'package:yoga/core/data/database.dart';
-import 'package:yoga/models/catagory.dart';
+import 'package:yoga/core/repositories/app_repository_imp.dart';
+import 'package:yoga/models/category.dart';
 import 'package:yoga/models/exercise.dart';
 import 'package:yoga/models/exercise_completed.dart';
-import 'package:yoga/modules/exercise/widget/countdown.dart';
+import 'package:yoga/modules/exercise/cubit/exercise_cubit.dart';
 import 'package:yoga/modules/exercise/widget/video_player.dart';
 import 'package:percent_indicator/circular_percent_indicator.dart';
 
 class ExerciseScreen extends StatefulWidget {
   final Category category;
-  final List<Exercise> listExercise;
+  final List<Exercise> exercises;
 
   const ExerciseScreen({
     Key? key,
     required this.category,
-    required this.listExercise,
+    required this.exercises,
   }) : super(key: key);
 
   @override
@@ -27,32 +27,19 @@ class ExerciseScreen extends StatefulWidget {
 
 class _ExerciseScreenState extends State<ExerciseScreen> {
   @override
-  void initState() {
-    WidgetsBinding.instance.addPostFrameCallback((timeStamp) {
-      //
-      Provider.of<Countdown>(context, listen: false)
-          .setLengthExercise(widget.listExercise.length);
-      //
-      Provider.of<Countdown>(context, listen: false).countdownTime();
-    });
-    super.initState();
-  }
-
-  @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
-    return Scaffold(
-      body: Container(
-        height: size.height,
-        width: size.width,
-        decoration: BoxDecoration(
-          color: AppColor.smokeWhite,
-        ),
-        child: SafeArea(
+    return BlocProvider<ExerciseCubit>(
+      create: (context) => ExerciseCubit(
+        context.read<AppRepositoryImp>(),
+        widget.exercises,
+      )..startWorkout(),
+      child: Scaffold(
+        backgroundColor: AppColor.smokeWhite,
+        body: SafeArea(
           bottom: false,
           child: Stack(
             children: [
-              //
               Column(
                 children: [
                   // header
@@ -97,24 +84,30 @@ class _ExerciseScreenState extends State<ExerciseScreen> {
                   Expanded(
                     child: ListView(
                       children: [
-                        CircularPercentIndicator(
-                          radius: 60,
-                          lineWidth: 20,
-                          percent: (context.read<Countdown>().getTime / 30),
-                          backgroundColor:
-                          AppColor.circleGradient2.withOpacity(0.2),
-                          progressColor: AppColor.circleGradient1,
-                          circularStrokeCap: CircularStrokeCap.round,
-                          center: Text(
-                            (context.read<Countdown>().getTime < 10)
-                                ? "0${context.watch<Countdown>().getTime}"
-                                : "${context.watch<Countdown>().getTime}",
-                            style: TextStyle(
-                              color: AppColor.blueDark,
-                              fontSize: 36,
-                              fontWeight: FontWeight.w500,
-                            ),
-                          ),
+                        BlocBuilder<ExerciseCubit, ExerciseState>(
+                          buildWhen: (previous, current) =>
+                              previous.tick != current.tick,
+                          builder: (context, state) {
+                            return CircularPercentIndicator(
+                              radius: 60,
+                              lineWidth: 20,
+                              percent: state.tick / 30,
+                              backgroundColor:
+                                  AppColor.circleGradient2.withOpacity(0.2),
+                              progressColor: AppColor.circleGradient1,
+                              circularStrokeCap: CircularStrokeCap.round,
+                              center: Text(
+                                state.tick < 10
+                                    ? "0${state.tick}"
+                                    : "${state.tick}",
+                                style: TextStyle(
+                                  color: AppColor.blueDark,
+                                  fontSize: 36,
+                                  fontWeight: FontWeight.w500,
+                                ),
+                              ),
+                            );
+                          },
                         ),
                         Padding(
                           padding: const EdgeInsets.only(
@@ -134,54 +127,66 @@ class _ExerciseScreenState extends State<ExerciseScreen> {
                                 )
                               ],
                             ),
-                            child: ExerciseVideoPlayer(
-                              videoName: widget
-                                  .listExercise[
-                                      context.watch<Countdown>().getIndex]
-                                  .image,
+                            child: BlocBuilder<ExerciseCubit, ExerciseState>(
+                              buildWhen: (previous, current) =>
+                                  previous.countCompletedExcercise !=
+                                  current.countCompletedExcercise,
+                              builder: (context, state) {
+                                return ExerciseVideoPlayer(
+                                  videoName: widget
+                                      .exercises[state.countCompletedExcercise]
+                                      .image,
+                                );
+                              },
                             ),
                           ),
                         ),
-                        Padding(
-                          padding: const EdgeInsets.only(
-                            left: 24,
-                            right: 24,
-                            top: 4,
-                            bottom: 24,
-                          ),
-                          child: Column(
-                            children: [
-                              Text(
-                                "${widget.listExercise[context.read<Countdown>().getIndex].name}",
-                                style: TextStyle(
-                                  color: AppColor.purpleDecor,
-                                  fontSize: 19,
-                                  fontFamily: "GT",
-                                  fontWeight: FontWeight.w500,
-                                ),
+                        BlocBuilder<ExerciseCubit, ExerciseState>(
+                          buildWhen: (previous, current) =>
+                              previous.countCompletedExcercise !=
+                              current.countCompletedExcercise,
+                          builder: (context, state) {
+                            return Padding(
+                              padding: const EdgeInsets.only(
+                                left: 24,
+                                right: 24,
+                                top: 4,
+                                bottom: 24,
                               ),
-                              Text(
-                                "${widget.listExercise[context.read<Countdown>().getIndex].description}",
-                                style: TextStyle(
-                                  color: Colors.black,
-                                  fontSize: 14,
-                                  fontFamily: "GT",
-                                  fontWeight: FontWeight.w400,
-                                ),
-                              )
-                            ],
-                          ),
+                              child: Column(
+                                children: [
+                                  Text(
+                                    "${widget.exercises[state.countCompletedExcercise].name}",
+                                    style: TextStyle(
+                                      color: AppColor.purpleDecor,
+                                      fontSize: 19,
+                                      fontFamily: "GT",
+                                      fontWeight: FontWeight.w500,
+                                    ),
+                                  ),
+                                  Text(
+                                    "${widget.exercises[state.countCompletedExcercise].description}",
+                                    style: TextStyle(
+                                      color: Colors.black,
+                                      fontSize: 14,
+                                      fontFamily: "GT",
+                                      fontWeight: FontWeight.w400,
+                                    ),
+                                  )
+                                ],
+                              ),
+                            );
+                          },
                         ),
                       ],
                     ),
                   ),
                 ],
               ),
-
-              (Provider.of<Countdown>(context).getTime == 0 &&
-                      Provider.of<Countdown>(context).getIndex ==
-                          widget.listExercise.length - 1)
-                  ? Positioned(
+              BlocBuilder<ExerciseCubit, ExerciseState>(
+                builder: (context, state) {
+                  if (state.status == ExerciseStatus.completedExcercise) {
+                    return Positioned(
                       left: 20,
                       right: 20,
                       bottom: 25,
@@ -193,9 +198,8 @@ class _ExerciseScreenState extends State<ExerciseScreen> {
                                   exerciseCount: widget.category.count,
                                   timeCount: widget.category.count / 2);
 
-                          await DatabaseProvider.db
-                              .addUpdateExcerciseCompleted(exerciseCompleted);
-
+                          final exerciseCubit = context.read<ExerciseCubit>();
+                          exerciseCubit.completedExcercise(exerciseCompleted);
                           Navigator.pop(context);
                         },
                         child: Container(
@@ -218,8 +222,11 @@ class _ExerciseScreenState extends State<ExerciseScreen> {
                           ),
                         ),
                       ),
-                    )
-                  : Container(),
+                    );
+                  }
+                  return const SizedBox();
+                },
+              ),
             ],
           ),
         ),

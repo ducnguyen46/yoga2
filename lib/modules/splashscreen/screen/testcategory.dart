@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:yoga/core/data/database.dart';
-import 'package:yoga/models/catagory.dart';
+import 'package:yoga/core/datasource/database_provider.dart';
+import 'package:yoga/models/category.dart';
 
 class TestCategory extends StatelessWidget {
   @override

@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:yoga/constants/app_color.dart';
-import 'package:yoga/core/data/database.dart';
-import 'package:yoga/modules/dashboard/widgets/list_yoga_category_type.dart';
+import 'package:yoga/modules/dashboard/cubit/home_cubit.dart';
+import 'package:yoga/modules/dashboard/widgets/yoga_categories_types.dart';
 
 class HomeScreen extends StatefulWidget {
   HomeScreen({
@@ -56,55 +57,36 @@ class _HomeScreenState extends State<HomeScreen> {
           ],
         ),
         Expanded(
-          child: FutureBuilder(
-            // lay ra cac categoryType
-            future: DatabaseProvider.db.getListCategoryType(),
-            builder: (context, listType) {
-              if (listType.hasData) {
-                // voi moi mot type, lay ra cac category
-                List<String> list = listType.data!;
-                return ListView.builder(
-                  itemCount: list.length,
-                  itemBuilder: (context, index) {
-                    return FutureBuilder(
-                      future:
-                          DatabaseProvider.db.getCategoryByType(list[index]),
-                      builder: (context, listCategoryByType) {
-                        if (listCategoryByType.hasData) {
-                          //truyen vao listCategory
-                          return Container(
-                            height: 309,
-                            width: size.width,
-                            margin: EdgeInsets.only(top: 40),
-                            child: ListYogaCategoryType(
-                              type: list[index],
-                              listCategory: listCategoryByType.data!,
-                            ),
-                          );
-                        } else {
-                          return Container(
-                            child: Center(
-                              child: CircularProgressIndicator(
-                                strokeWidth: 2,
-                              ),
-                            ),
-                          );
-                        }
-                      },
-                    );
-                  },
-                );
-              } else {
-                return Container(
-                  child: Center(
-                    child: CircularProgressIndicator(
-                      strokeWidth: 2,
+          child: BlocBuilder<HomeCubit, HomeState>(builder: (context, state) {
+            if (state.status == HomeStatus.loading ||
+                state.status == HomeStatus.initial) {
+              return Center(
+                child: CircularProgressIndicator(
+                  strokeWidth: 4.0,
+                ),
+              );
+            } else if (state.status == HomeStatus.loaded) {
+              return ListView.builder(
+                itemCount: state.categoriesByTypes.length,
+                itemBuilder: (context, index) {
+                  //truyen vao listCategory
+                  return Container(
+                    height: 309,
+                    width: size.width,
+                    margin: EdgeInsets.only(top: 40),
+                    child: YogaCategoriesTypes(
+                      listCategory:
+                          state.categoriesByTypes.values.elementAt(index),
                     ),
-                  ),
-                );
-              }
-            },
-          ),
+                  );
+                },
+              );
+            } else {
+              return Center(
+                child: Text("Some thing error! Please try again later"),
+              );
+            }
+          }),
         ),
       ],
     );

@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:yoga/constants/app_color.dart';
 import 'package:yoga/constants/app_path.dart';
+import 'package:yoga/modules/dashboard/cubit/dashboard_cubit.dart';
 import 'package:yoga/modules/progress/screen/progress_screen.dart';
-import 'package:yoga/modules/rountine/screen/rountine_screen.dart';
+import 'package:yoga/modules/rountine/screen/routine_screen.dart';
 import 'package:yoga/modules/setting/screen/setting_screen.dart';
 
 import 'home_screen.dart';
@@ -15,9 +17,6 @@ class DashboardScreen extends StatefulWidget {
 
 class _DashboardScreenState extends State<DashboardScreen>
     with SingleTickerProviderStateMixin {
-  bool _showMenu = false;
-  int tabActive = 0;
-
   final Duration duration = const Duration(milliseconds: 200);
   late AnimationController _controller;
 
@@ -54,6 +53,12 @@ class _DashboardScreenState extends State<DashboardScreen>
   }
 
   @override
+  void dispose() {
+    _controller.dispose();
+    super.dispose();
+  }
+
+  @override
   Widget build(BuildContext context) {
     var size = MediaQuery.of(context).size;
 
@@ -64,8 +69,6 @@ class _DashboardScreenState extends State<DashboardScreen>
         decoration: BoxDecoration(
           color: AppColor.smokeWhite,
         ),
-        //
-
         child: Stack(
           children: [
             Positioned(
@@ -80,52 +83,69 @@ class _DashboardScreenState extends State<DashboardScreen>
             ),
             //
             //man hinh
-            AnimatedPositioned(
-              top: 0,
-              bottom: 0,
-              left: _showMenu ? 100 : 0,
-              right: _showMenu ? -100 : 0,
-              duration: duration,
-              // man hinh chinh
-              child: SafeArea(
-                bottom: false,
-                child: screens[tabActive],
-              ),
+            BlocBuilder<DashboardCubit, DashboardState>(
+              buildWhen: (previous, current) =>
+                  previous.isShowMenu != current.isShowMenu,
+              builder: (context, state) {
+                return AnimatedPositioned(
+                  top: 0,
+                  bottom: 0,
+                  left: state.isShowMenu ? 100 : 0,
+                  right: state.isShowMenu ? -100 : 0,
+                  duration: duration,
+                  // man hinh chinh
+                  child: BlocBuilder<DashboardCubit, DashboardState>(
+                    buildWhen: (previous, current) =>
+                        previous.tabActive != current.tabActive,
+                    builder: (context, state) {
+                      return SafeArea(
+                        bottom: false,
+                        child: screens[state.tabActive],
+                      );
+                    },
+                  ),
+                );
+              },
             ),
 
             // menu
-            AnimatedPositioned(
-              top: 0,
-              bottom: 0,
-              left: _showMenu ? 0 : -100,
-              right: _showMenu ? size.width - 100 : size.width,
-              duration: duration,
-              child: SafeArea(
-                child: Container(
-                  height: size.height,
-                  width: 100,
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.center,
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      for (MenuTab tab in menuTabs)
-                        GestureDetector(
-                          onTap: () {
-                            setState(() {
-                              tabActive = menuTabs.indexOf(tab);
-                              _showMenu = !_showMenu;
-                            });
-                          },
-                          child: MenuTabWidget(
-                            menuTab: tab,
-                            tabAt: menuTabs.indexOf(tab),
-                            tabActive: tabActive,
-                          ),
-                        ),
-                    ],
+            BlocBuilder<DashboardCubit, DashboardState>(
+              buildWhen: (previous, current) =>
+                  previous.isShowMenu != current.isShowMenu,
+              builder: (context, state) {
+                return AnimatedPositioned(
+                  top: 0,
+                  bottom: 0,
+                  left: state.isShowMenu ? 0 : -100,
+                  right: state.isShowMenu ? size.width - 100 : size.width,
+                  duration: duration,
+                  child: SafeArea(
+                    child: Container(
+                      height: size.height,
+                      width: 100,
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.center,
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          for (MenuTab tab in menuTabs)
+                            GestureDetector(
+                              onTap: () {
+                                final dashboardCubit =
+                                    context.read<DashboardCubit>();
+                                dashboardCubit.selectTab(menuTabs.indexOf(tab));
+                              },
+                              child: MenuTabWidget(
+                                menuTab: tab,
+                                tabAt: menuTabs.indexOf(tab),
+                                tabActive: state.tabActive,
+                              ),
+                            ),
+                        ],
+                      ),
+                    ),
                   ),
-                ),
-              ),
+                );
+              },
             ),
 
             //show menu button
@@ -136,34 +156,38 @@ class _DashboardScreenState extends State<DashboardScreen>
                   padding: const EdgeInsets.only(left: 25, right: 25, top: 10),
                   child: Row(
                     children: [
-                      GestureDetector(
-                        onTap: () {
-                          setState(() {
-                            if (_showMenu) {
-                              _controller.reverse();
-                            } else {
-                              _controller.forward();
-                            }
-                            _showMenu = !_showMenu;
-                          });
+                      BlocBuilder<DashboardCubit, DashboardState>(
+                        buildWhen: (previous, current) =>
+                            previous.isShowMenu != current.isShowMenu,
+                        builder: (context, state) {
+                          return GestureDetector(
+                            onTap: () {
+                              context.read<DashboardCubit>().tapDrawer();
+                              if (state.isShowMenu) {
+                                _controller.reverse();
+                              } else {
+                                _controller.forward();
+                              }
+                            },
+                            child: Container(
+                              padding: EdgeInsets.all(10),
+                              decoration: BoxDecoration(
+                                shape: BoxShape.circle,
+                                color: AppColor.smokeWhite,
+                                boxShadow: [
+                                  BoxShadow(
+                                    color: AppColor.grayBlue.withOpacity(0.4),
+                                    offset: Offset(5, 5),
+                                    blurRadius: 30,
+                                  )
+                                ],
+                              ),
+                              child: SvgPicture.asset(state.isShowMenu
+                                  ? AppPath.toAssetsIcons + "cancle.svg"
+                                  : AppPath.toAssetsIcons + 'menu.svg'),
+                            ),
+                          );
                         },
-                        child: Container(
-                          padding: EdgeInsets.all(10),
-                          decoration: BoxDecoration(
-                            shape: BoxShape.circle,
-                            color: AppColor.smokeWhite,
-                            boxShadow: [
-                              BoxShadow(
-                                color: AppColor.grayBlue.withOpacity(0.4),
-                                offset: Offset(5, 5),
-                                blurRadius: 30,
-                              )
-                            ],
-                          ),
-                          child: SvgPicture.asset(_showMenu
-                              ? AppPath.toAssetsIcons + "cancle.svg"
-                              : AppPath.toAssetsIcons + 'menu.svg'),
-                        ),
                       ),
                     ],
                   ),
