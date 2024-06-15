@@ -313,7 +313,7 @@ class DatabaseProvider {
   }
 
   // đếm số bài tập có trong bảng
-  Future<int> countWorkoutCompleted() async {
+  Future<int?> countWorkoutCompleted() async {
     var db = await database;
     var queryCount = await db
         .query("exercise_completed", columns: ["COUNT(namefit) as count"]);
@@ -321,31 +321,30 @@ class DatabaseProvider {
     // var queryCount = await db
     //     .rawQuery("SELECT COUNT(namefit) as count FROM exercise_completed");
 
-    int count = queryCount.map((json) => json["count"]).toList()[0] as int;
-
+    int? count = int.tryParse(
+        queryCount.map((json) => json["count"]).toList()[0].toString());
     return count;
   }
 
   // tính tổng các bài tập đã tập
-  Future<int> sumExerciseCompleted() async {
+  Future<int?> sumExerciseCompleted() async {
     var db = await database;
     var queryCount = await db.query("exercise_completed",
         columns: ["SUM(exercise_count) as exercise"]);
 
-    int count = queryCount.map((json) => json["exercise"]).toList()[0] as int;
-
+    int? count = int.tryParse(
+        queryCount.map((json) => json["exercise"]).toList()[0].toString());
     return count;
   }
 
   // tính tổng thời gian trong các bài tập
-  Future<double> sumTimeCompleted() async {
+  Future<double?> sumTimeCompleted() async {
     var db = await database;
     var queryCount = await db.query("exercise_completed",
         columns: ["SUM(time_count) as time_count"]);
 
-    double count =
-        queryCount.map((json) => json["time_count"]).toList()[0] as double;
-
+    double? count = double.tryParse(
+        queryCount.map((json) => json["time_count"]).toList()[0].toString());
     return count;
   }
 

@@ -5,6 +5,7 @@ import 'package:yoga/core/datasource/database_provider.dart';
 import 'package:yoga/core/repositories/app_repository_imp.dart';
 import 'package:yoga/modules/dashboard/cubit/dashboard_cubit.dart';
 import 'package:yoga/modules/dashboard/cubit/home_cubit.dart';
+import 'package:yoga/modules/progress/cubit/progress_cubit.dart';
 import 'package:yoga/modules/rountine/cubit/liked_exercise_cubit.dart';
 import 'package:yoga/modules/rountine/cubit/routine_exercise_cubit.dart';
 import 'package:yoga/modules/splashscreen/screen/yoga_coming.dart';
@@ -45,6 +46,11 @@ class MyApp extends StatelessWidget {
             create: (context) => RoutineExerciseCubit(
               context.read<AppRepositoryImp>(),
             )..getRoutineCategories(),
+          ),
+          BlocProvider(
+            create: (context) => ProgressCubit(
+              context.read<AppRepositoryImp>(),
+            )..getInitalProgressData(),
           ),
         ],
         child: MaterialApp(

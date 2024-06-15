@@ -19,12 +19,12 @@ class ExerciseCubit extends Cubit<ExerciseState> {
   final int exerciseTime = 30; // seconds
 
   void startWorkout() {
-    _timer = Timer.periodic(Duration(milliseconds: 1000), (_) {
+    _timer = Timer.periodic(Duration(milliseconds: 0), (_) {
       _countDownCheck();
     });
   }
 
-  void completedExcercise(ExerciseCompleted exerciseCompleted) async {
+  Future<void> completedExcercise(ExerciseCompleted exerciseCompleted) async {
     await _appRepository.addUpdateExcerciseCompleted(exerciseCompleted);
   }
 

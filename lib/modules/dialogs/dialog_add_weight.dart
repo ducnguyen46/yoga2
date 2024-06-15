@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:intl/intl.dart';
 import 'package:table_calendar/table_calendar.dart';
 import 'package:yoga/constants/app_color.dart';
-import 'package:yoga/core/datasource/database_provider.dart';
 import 'package:yoga/modules/dialogs/dialog_alert.dart';
+import 'package:yoga/modules/progress/cubit/progress_cubit.dart';
 
 class DialogAddWeight extends StatefulWidget {
   @override
@@ -31,16 +32,17 @@ class _DialogAddWeightState extends State<DialogAddWeight> {
           "Enter the correct number for your weight\n Ex: 50, 50.5", false);
       _focusWeight.requestFocus();
     } else {
-      _addWeightToDB(double.parse(value), _selectedDay, _selectKg);
+      _addWeightToDB(context, double.parse(value), _selectedDay, _selectKg);
     }
   }
 
-  void _addWeightToDB(double weight, DateTime date, bool isKg) async {
+  void _addWeightToDB(
+      BuildContext context, double weight, DateTime date, bool isKg) async {
     const double lbToKg = 0.45359; // 1 pound = 0.4536 kg
     if (!isKg) {
       weight = double.parse((weight * lbToKg).toStringAsFixed(4));
     }
-    await DatabaseProvider.db.addWeight(weight, date).then((value) {
+    await context.read<ProgressCubit>().addWeight(weight, date).then((_) {
       Navigator.pop(context);
       _showAlertDialog("Success!",
           "We just add your weight!. Have a nice day with strong body!", true);

@@ -10,6 +10,8 @@ import 'package:yoga/models/exercise_completed.dart';
 import 'package:yoga/modules/exercise/cubit/exercise_cubit.dart';
 import 'package:yoga/modules/exercise/widget/video_player.dart';
 import 'package:percent_indicator/circular_percent_indicator.dart';
+import 'package:yoga/modules/progress/cubit/progress_cubit.dart';
+import 'package:yoga/modules/rountine/cubit/routine_exercise_cubit.dart';
 
 class ExerciseScreen extends StatefulWidget {
   final Category category;
@@ -183,7 +185,25 @@ class _ExerciseScreenState extends State<ExerciseScreen> {
                   ),
                 ],
               ),
-              BlocBuilder<ExerciseCubit, ExerciseState>(
+              BlocConsumer<ExerciseCubit, ExerciseState>(
+                listener: (BuildContext context, ExerciseState state) async {
+                  if (state.status == ExerciseStatus.completedExcercise) {
+                    ExerciseCompleted exerciseCompleted = ExerciseCompleted(
+                        namefit: widget.category.namefit,
+                        exerciseCount: widget.category.count,
+                        timeCount: widget.category.count / 2);
+
+                    final exerciseCubit = context.read<ExerciseCubit>();
+                    await exerciseCubit
+                        .completedExcercise(exerciseCompleted)
+                        .then((_) {
+                      context
+                          .read<RoutineExerciseCubit>()
+                          .updateAfterCompleteCategory();
+                      context.read<ProgressCubit>().updateDataWorkoutExercise();
+                    });
+                  }
+                },
                 builder: (context, state) {
                   if (state.status == ExerciseStatus.completedExcercise) {
                     return Positioned(
@@ -192,14 +212,6 @@ class _ExerciseScreenState extends State<ExerciseScreen> {
                       bottom: 25,
                       child: InkWell(
                         onTap: () async {
-                          ExerciseCompleted exerciseCompleted =
-                              ExerciseCompleted(
-                                  namefit: widget.category.namefit,
-                                  exerciseCount: widget.category.count,
-                                  timeCount: widget.category.count / 2);
-
-                          final exerciseCubit = context.read<ExerciseCubit>();
-                          exerciseCubit.completedExcercise(exerciseCompleted);
                           Navigator.pop(context);
                         },
                         child: Container(

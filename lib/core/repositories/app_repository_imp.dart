@@ -3,6 +3,7 @@ import 'package:yoga/core/repositories/app_repository.dart';
 import 'package:yoga/models/category.dart';
 import 'package:yoga/models/exercise.dart';
 import 'package:yoga/models/exercise_completed.dart';
+import 'package:yoga/models/weight.dart';
 
 class AppRepositoryImp extends AppRepository {
   final DatabaseProvider _dbProvider;
@@ -50,5 +51,45 @@ class AppRepositoryImp extends AppRepository {
   @override
   Future<List<Category>> getCategoriesCompleted() {
     return _dbProvider.getCategoriesCompleted();
+  }
+
+  @override
+  Future<int?> countWorkoutCompleted() {
+    return _dbProvider.countWorkoutCompleted();
+  }
+
+  @override
+  Future<List<Weight>> getAllWeight() {
+    return _dbProvider.getAllWeight();
+  }
+
+  @override
+  Future<double> getCurrentWeight() {
+    return _dbProvider.getCurrentWeight();
+  }
+
+  @override
+  Future<double> getMaxWeight() {
+    return _dbProvider.getMaxWeight();
+  }
+
+  @override
+  Future<double> getMinWeight() {
+    return _dbProvider.getMinWeight();
+  }
+
+  @override
+  Future<int?> sumExerciseCompleted() {
+    return _dbProvider.sumExerciseCompleted();
+  }
+
+  @override
+  Future<double?> sumTimeCompleted() {
+    return _dbProvider.sumTimeCompleted();
+  }
+
+  @override
+  Future<bool> addWeight(double weight, DateTime date) {
+    return _dbProvider.addWeight(weight, date);
   }
 }
