@@ -4,9 +4,7 @@ import 'package:yoga/constants/app_color.dart';
 import 'package:yoga/constants/app_path.dart';
 
 class AboutUsSetting extends StatelessWidget {
-  String _aboutUs =
-      "Devsenior founded in 2020 by MRSONPRO, Devsenior is one of the startup companies specializing in developing applications on two operating systems iOS  .. We are a passionate group to create affecting people's lives by creating IT products that they like to use for everyday life. We like to work with new technology and demonstrate a full commitment to agile workflow for a streamlined organization. We are product oriented, not only committed to user-friendly applications but also work with high quality code for sustainable development.";
-
+  String _aboutUs = "Hi there";
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;

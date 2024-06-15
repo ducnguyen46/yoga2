@@ -108,11 +108,10 @@ class _ProgressScreenState extends State<ProgressScreen> {
                             fontFamily: "GT",
                           ),
                         ),
-                        InkWell(
+                        GestureDetector(
                           onTap: () {
                             _showAddWeightDialog(context);
                           },
-                          splashColor: AppColor.lightGray,
                           child: Container(
                             padding: EdgeInsets.all(8.0),
                             decoration: BoxDecoration(
@@ -278,10 +277,10 @@ class _ProgressScreenState extends State<ProgressScreen> {
                           mainAxisAlignment: MainAxisAlignment.spaceAround,
                           children: [
                             BlocBuilder<ProgressCubit, ProgressState>(
-                              buildWhen: (previous, current) =>
-                                  previous.status ==
-                                      ProgressStatus.loadingExercise &&
-                                  current.status == ProgressStatus.loaded,
+                              // buildWhen: (previous, current) =>
+                              //     previous.status ==
+                              //         ProgressStatus.loadingExercise &&
+                              //     current.status == ProgressStatus.loaded,
                               builder: (context, state) {
                                 return CalculateExercise(
                                   value: state.countWorkoutCompleted != null

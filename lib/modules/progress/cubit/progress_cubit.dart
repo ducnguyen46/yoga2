@@ -44,9 +44,9 @@ class ProgressCubit extends Cubit<ProgressState> {
     ]).then((data) {
       emit(state.copyWith(
         status: ProgressStatus.loaded,
-        countWorkoutCompleted: data[1] as int?,
-        countExerciseCompleted: data[2] as int?,
-        timeWorkoutCompleted: data[3] as double?,
+        countWorkoutCompleted: data[0] as int?,
+        countExerciseCompleted: data[1] as int?,
+        timeWorkoutCompleted: data[2] as double?,
       ));
     });
   }

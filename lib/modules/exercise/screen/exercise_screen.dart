@@ -193,8 +193,8 @@ class _ExerciseScreenState extends State<ExerciseScreen> {
                         exerciseCount: widget.category.count,
                         timeCount: widget.category.count / 2);
 
-                    final exerciseCubit = context.read<ExerciseCubit>();
-                    await exerciseCubit
+                    await context
+                        .read<ExerciseCubit>()
                         .completedExcercise(exerciseCompleted)
                         .then((_) {
                       context
@@ -204,13 +204,17 @@ class _ExerciseScreenState extends State<ExerciseScreen> {
                     });
                   }
                 },
+                buildWhen: (previous, current) {
+                  return previous.status == ExerciseStatus.savingData &&
+                      current.status == ExerciseStatus.savedData;
+                },
                 builder: (context, state) {
-                  if (state.status == ExerciseStatus.completedExcercise) {
+                  if (state.status == ExerciseStatus.savedData) {
                     return Positioned(
                       left: 20,
                       right: 20,
                       bottom: 25,
-                      child: InkWell(
+                      child: GestureDetector(
                         onTap: () async {
                           Navigator.pop(context);
                         },

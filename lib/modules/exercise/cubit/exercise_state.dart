@@ -1,6 +1,6 @@
 part of 'exercise_cubit.dart';
 
-enum ExerciseStatus { running, completedExcercise }
+enum ExerciseStatus { running, completedExcercise, savingData, savedData }
 
 @freezed
 class ExerciseState with _$ExerciseState {

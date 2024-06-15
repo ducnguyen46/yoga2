@@ -206,8 +206,7 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
                           ),
                         ),
                       ),
-                      InkWell(
-                        splashColor: AppColor.purpleDecor,
+                      GestureDetector(
                         onTap: () async {
                           await _addWeightCompleted(_weightController.text);
                           _letgo

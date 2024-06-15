@@ -25,7 +25,9 @@ class ExerciseCubit extends Cubit<ExerciseState> {
   }
 
   Future<void> completedExcercise(ExerciseCompleted exerciseCompleted) async {
+    emit(state.copyWith(status: ExerciseStatus.savingData));
     await _appRepository.addUpdateExcerciseCompleted(exerciseCompleted);
+    emit(state.copyWith(status: ExerciseStatus.savedData));
   }
 
   void _countDownCheck() {

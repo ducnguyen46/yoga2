@@ -64,11 +64,10 @@ class DialogAlert extends StatelessWidget {
                   textAlign: TextAlign.center,
                 ),
               ),
-              InkWell(
+              GestureDetector(
                 onTap: () {
                   Navigator.pop(context);
                 },
-                splashColor: AppColor.purpleDecor.withOpacity(0.9),
                 child: Container(
                   margin: EdgeInsets.only(
                     top: 30,

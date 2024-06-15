@@ -275,8 +275,7 @@ class _DialogAddWeightState extends State<DialogAddWeight> {
         ///
         Row(
           children: [
-            InkWell(
-              splashColor: AppColor.purpleDecor,
+            GestureDetector(
               onTap: () {
                 Navigator.pop(context);
               },
@@ -301,9 +300,7 @@ class _DialogAddWeightState extends State<DialogAddWeight> {
                 ),
               ),
             ),
-            InkWell(
-              splashColor: AppColor.purpleDecor.withOpacity(0.7),
-              onLongPress: () {},
+            GestureDetector(
               onTap: () {
                 _addWeightCompleted(_weightController.text);
               },

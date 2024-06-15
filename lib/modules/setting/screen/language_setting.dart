@@ -121,7 +121,7 @@ class _LanguageSettingState extends State<LanguageSetting> {
             Positioned(
               left: size.width / 4 + 20,
               bottom: 25,
-              child: InkWell(
+              child: GestureDetector(
                 onTap: () {},
                 child: Container(
                   padding: EdgeInsets.all(8),

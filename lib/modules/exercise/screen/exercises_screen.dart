@@ -262,7 +262,7 @@ class _ExercisesScreenState extends State<ExercisesScreen> {
                   return Positioned(
                     left: size.width / 4 + 20,
                     bottom: 25,
-                    child: InkWell(
+                    child: GestureDetector(
                       onTap: () {
                         Navigator.push(
                           context,
