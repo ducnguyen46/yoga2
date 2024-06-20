@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:yoga/modules/rountine/cubit/routine_exercise_cubit.dart';
 import 'package:yoga/modules/rountine/widgets/yoga_category_card_grid.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class RoutinePage extends StatelessWidget {
   @override
@@ -27,7 +28,7 @@ class RoutinePage extends StatelessWidget {
                     vertical: 25,
                   ),
                   child: Text(
-                    "Your routines",
+                    AppLocalizations.of(context)!.your_routine,
                     style: TextStyle(
                       color: Colors.black,
                       fontFamily: 'GT',

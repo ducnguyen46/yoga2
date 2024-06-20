@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:yoga/constants/app_color.dart';
 import 'package:yoga/modules/dashboard/cubit/home_cubit.dart';
 import 'package:yoga/modules/dashboard/widgets/yoga_categories_types.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class HomeScreen extends StatefulWidget {
   HomeScreen({
@@ -34,7 +35,7 @@ class _HomeScreenState extends State<HomeScreen> {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
-                    'Yoga App',
+                    AppLocalizations.of(context)!.yoga_app,
                     style: TextStyle(
                       fontFamily: 'Victoria',
                       fontSize: 70,
@@ -43,7 +44,7 @@ class _HomeScreenState extends State<HomeScreen> {
                     ),
                   ),
                   Text(
-                    'Find your Yoga exercise today.',
+                    AppLocalizations.of(context)!.yoga_app_sologan,
                     style: TextStyle(
                       fontFamily: 'GT',
                       fontSize: 17,
@@ -83,7 +84,7 @@ class _HomeScreenState extends State<HomeScreen> {
               );
             } else {
               return Center(
-                child: Text("Some thing error! Please try again later"),
+                child: Text(AppLocalizations.of(context)!.error),
               );
             }
           }),

@@ -7,6 +7,7 @@ import 'package:yoga/modules/dashboard/cubit/dashboard_cubit.dart';
 import 'package:yoga/modules/progress/screen/progress_screen.dart';
 import 'package:yoga/modules/rountine/screen/routine_screen.dart';
 import 'package:yoga/modules/setting/screen/setting_screen.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 import 'home_screen.dart';
 
@@ -19,25 +20,6 @@ class _DashboardScreenState extends State<DashboardScreen>
     with SingleTickerProviderStateMixin {
   final Duration duration = const Duration(milliseconds: 200);
   late AnimationController _controller;
-
-  List<MenuTab> menuTabs = [
-    MenuTab(
-      name: "Exercise",
-      iconPath: AppPath.toAssetsIcons + "home.svg",
-    ),
-    MenuTab(
-      name: "Progress",
-      iconPath: AppPath.toAssetsIcons + "progress.svg",
-    ),
-    MenuTab(
-      name: "Routine",
-      iconPath: AppPath.toAssetsIcons + "workout.svg",
-    ),
-    MenuTab(
-      name: "Setting",
-      iconPath: AppPath.toAssetsIcons + "settings.svg",
-    ),
-  ];
 
   List<Widget> screens = [
     HomeScreen(),
@@ -61,6 +43,25 @@ class _DashboardScreenState extends State<DashboardScreen>
   @override
   Widget build(BuildContext context) {
     var size = MediaQuery.of(context).size;
+
+    List<MenuTab> menuTabs = [
+      MenuTab(
+        name: AppLocalizations.of(context)!.exercises,
+        iconPath: AppPath.toAssetsIcons + "home.svg",
+      ),
+      MenuTab(
+        name: AppLocalizations.of(context)!.progress,
+        iconPath: AppPath.toAssetsIcons + "progress.svg",
+      ),
+      MenuTab(
+        name: AppLocalizations.of(context)!.routines,
+        iconPath: AppPath.toAssetsIcons + "workout.svg",
+      ),
+      MenuTab(
+        name: AppLocalizations.of(context)!.setting,
+        iconPath: AppPath.toAssetsIcons + "settings.svg",
+      ),
+    ];
 
     return Scaffold(
       body: Container(

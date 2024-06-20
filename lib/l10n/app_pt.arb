@@ -1,0 +1,52 @@
+{
+    "success": "Sucesso",
+    "cancel": "Cancelar",
+    "save": "Salvar",
+    "done": "Feito",
+    "more" : "Mais",
+    "lets_go" : "Vamos",
+    "error": "Algo deu errado! Tente novamente mais tarde",
+  
+    "exercise": "Exercício",
+    "progress": "Progresso",
+    "routine": "Rotina",
+    "setting": "Configuração",
+    "yoga_app": "Aplicativo de Yoga",
+    "yoga_app_sologan": "Encontre seu exercício de Yoga hoje.",
+    "yogo_app_welcome" : "Meditação de Yoga para níveis iniciantes e avançados, exercícios para perda de peso e preparação física.",
+  
+    "popular": "Popular",
+    "beginners": "Iniciantes",
+    "better_life": "Vida Melhor",
+    "stress_relax": "Relaxamento do Estresse",
+    "women": "Mulheres",
+    "seasons": "Estações",
+    "routines": "Rotinas",
+    "something_other": "Algo mais",
+  
+    "your_weight": "Seu peso",
+  
+    "noti_wrong_weight": "Hmmmm, peso incorreto?!",
+    "noti_wrong_weight_des": "Digite o número correto para o seu peso\n Ex: 50, 50.5",
+    "noti_added_weight": "Acabamos de adicionar seu peso! Tenha um bom dia com um corpo forte!",
+  
+    "how_to_perform": "Como executar",
+    "current": "Atual",
+    "max": "Máx",
+    "min": "Mín",
+    "statistic": "Estatística",
+    "workout": "Treino",
+    "no_info": "Sem informação",
+    "exercises": "Exercícios",
+    "minutes": "Minutos",
+    "add_weight": "Adicionar peso",
+  
+    "your_routine_slogan": "Suas rotinas e seus exercícios estão aqui!",
+    "exercise_liked_by_you": "Exercícios curtidos por você!",
+    "your_routine": "Suas rotinas",
+  
+    "push_noti": "Notificações push",
+    "language": "Linguagem",
+    "about_us": "Sobre nós",
+    "privacy_policy": "Política de Privacidade"
+  }

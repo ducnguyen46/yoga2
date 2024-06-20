@@ -9,6 +9,7 @@ import 'package:yoga/modules/exercise/cubit/exercises_cubit.dart';
 import 'package:yoga/modules/exercise/screen/exercise_screen.dart';
 import 'package:yoga/modules/exercise/widget/exercise_card.dart';
 import 'package:yoga/modules/rountine/cubit/liked_exercise_cubit.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class ExercisesScreen extends StatefulWidget {
   final Category category;
@@ -173,7 +174,7 @@ class _ExercisesScreenState extends State<ExercisesScreen> {
                                 Padding(
                                   padding: const EdgeInsets.only(left: 8),
                                   child: Text(
-                                    "${widget.category.count / 2} minutes",
+                                    "${widget.category.count / 2} ${AppLocalizations.of(context)!.minutes.toLowerCase()}",
                                     style: TextStyle(
                                       fontWeight: FontWeight.w400,
                                       fontFamily: "GT",
@@ -200,7 +201,7 @@ class _ExercisesScreenState extends State<ExercisesScreen> {
                                 Padding(
                                   padding: const EdgeInsets.only(left: 7),
                                   child: Text(
-                                    '${widget.category.count} exercises',
+                                    '${widget.category.count} ${AppLocalizations.of(context)!.exercises.toLowerCase()}',
                                     style: TextStyle(
                                       color: Colors.black,
                                       fontSize: 17,
@@ -285,7 +286,7 @@ class _ExercisesScreenState extends State<ExercisesScreen> {
                         ),
                         child: Center(
                           child: Text(
-                            "Start",
+                            AppLocalizations.of(context)!.lets_go,
                             style: TextStyle(
                               color: AppColor.reallyWhite,
                               fontSize: 16,

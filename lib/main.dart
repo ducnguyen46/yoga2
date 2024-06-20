@@ -1,21 +1,32 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_localizations/flutter_localizations.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:yoga/core/datasource/database_provider.dart';
 import 'package:yoga/core/repositories/app_repository_imp.dart';
+import 'package:yoga/modules/app_language/cubit/app_language_cubit.dart';
 import 'package:yoga/modules/dashboard/cubit/dashboard_cubit.dart';
 import 'package:yoga/modules/dashboard/cubit/home_cubit.dart';
 import 'package:yoga/modules/progress/cubit/progress_cubit.dart';
 import 'package:yoga/modules/rountine/cubit/liked_exercise_cubit.dart';
 import 'package:yoga/modules/rountine/cubit/routine_exercise_cubit.dart';
 import 'package:yoga/modules/splashscreen/screen/yoga_coming.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  runApp(MyApp());
+  final _sharePreferences = await SharedPreferences.getInstance();
+  runApp(MyApp(
+    sharedPreferences: _sharePreferences,
+  ));
 }
 
 class MyApp extends StatelessWidget {
+  final SharedPreferences sharedPreferences;
+
+  const MyApp({super.key, required this.sharedPreferences});
+
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
@@ -52,13 +63,29 @@ class MyApp extends StatelessWidget {
               context.read<AppRepositoryImp>(),
             )..getInitalProgressData(),
           ),
+          BlocProvider(
+            create: (context) => AppLanguageCubit(
+              sharedPreferences,
+            )..checkApplySystemLocale(),
+          )
         ],
-        child: MaterialApp(
-          title: 'Yoga',
-          theme: ThemeData(
-            brightness: Brightness.light,
-          ),
-          home: YogaComing(),
+        child: BlocBuilder<AppLanguageCubit, AppLanguageState>(
+          buildWhen: (previous, current) =>
+              previous.appLocale.languageCode != current.appLocale.languageCode,
+          builder: (context, state) {
+            return MaterialApp(
+              title: 'Yoga',
+              locale: state.appLocale,
+              localizationsDelegates: [
+                AppLocalizations.delegate,
+                GlobalMaterialLocalizations.delegate,
+                GlobalWidgetsLocalizations.delegate,
+                GlobalCupertinoLocalizations.delegate,
+              ],
+              supportedLocales: AppLocalizations.supportedLocales,
+              home: YogaComing(),
+            );
+          },
         ),
       ),
     );

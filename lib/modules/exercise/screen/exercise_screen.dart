@@ -12,6 +12,7 @@ import 'package:yoga/modules/exercise/widget/video_player.dart';
 import 'package:percent_indicator/circular_percent_indicator.dart';
 import 'package:yoga/modules/progress/cubit/progress_cubit.dart';
 import 'package:yoga/modules/rountine/cubit/routine_exercise_cubit.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class ExerciseScreen extends StatefulWidget {
   final Category category;
@@ -227,7 +228,7 @@ class _ExerciseScreenState extends State<ExerciseScreen> {
                           ),
                           child: Center(
                             child: Text(
-                              "Done",
+                              AppLocalizations.of(context)!.done,
                               style: TextStyle(
                                 color: AppColor.reallyWhite,
                                 fontSize: 16,

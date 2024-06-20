@@ -5,6 +5,7 @@ import 'package:yoga/modules/dialogs/dialog_add_weight.dart';
 import 'package:yoga/modules/progress/cubit/progress_cubit.dart';
 import 'package:yoga/modules/progress/widget/calculate_exercise.dart';
 import 'package:yoga/modules/progress/widget/chart_weight.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class ProgressScreen extends StatefulWidget {
   @override
@@ -100,7 +101,7 @@ class _ProgressScreenState extends State<ProgressScreen> {
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
                         Text(
-                          "Your progress",
+                          AppLocalizations.of(context)!.progress,
                           style: TextStyle(
                             color: Colors.black,
                             fontSize: 19,
@@ -119,7 +120,7 @@ class _ProgressScreenState extends State<ProgressScreen> {
                               borderRadius: BorderRadius.circular(8),
                             ),
                             child: Text(
-                              "Add weight",
+                              AppLocalizations.of(context)!.add_weight,
                               style: TextStyle(
                                 color: AppColor.purpleDecor,
                                 fontSize: 17,
@@ -141,7 +142,7 @@ class _ProgressScreenState extends State<ProgressScreen> {
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
                             Text(
-                              "Current",
+                              AppLocalizations.of(context)!.current,
                               style: TextStyle(
                                 color: AppColor.blueDark,
                                 fontSize: 17,
@@ -174,7 +175,7 @@ class _ProgressScreenState extends State<ProgressScreen> {
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
                               Text(
-                                "Max",
+                                AppLocalizations.of(context)!.max,
                                 style: TextStyle(
                                   color: AppColor.blueDark,
                                   fontSize: 17,
@@ -207,7 +208,7 @@ class _ProgressScreenState extends State<ProgressScreen> {
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
                             Text(
-                              "Min",
+                              AppLocalizations.of(context)!.min,
                               style: TextStyle(
                                 color: AppColor.blueDark,
                                 fontSize: 17,
@@ -264,7 +265,7 @@ class _ProgressScreenState extends State<ProgressScreen> {
                             horizontal: 4,
                           ),
                           child: Text(
-                            "Statistic",
+                            AppLocalizations.of(context)!.statistic,
                             style: TextStyle(
                               color: Colors.black,
                               fontSize: 16,
@@ -285,8 +286,8 @@ class _ProgressScreenState extends State<ProgressScreen> {
                                 return CalculateExercise(
                                   value: state.countWorkoutCompleted != null
                                       ? "${state.countWorkoutCompleted}"
-                                      : "No info",
-                                  title: "Workout",
+                                      : AppLocalizations.of(context)!.no_info,
+                                  title: AppLocalizations.of(context)!.workout,
                                 );
                               },
                             ),
@@ -299,8 +300,9 @@ class _ProgressScreenState extends State<ProgressScreen> {
                                 return CalculateExercise(
                                   value: state.countExerciseCompleted != null
                                       ? "${state.countExerciseCompleted}"
-                                      : "No info",
-                                  title: "Exercises",
+                                      : AppLocalizations.of(context)!.no_info,
+                                  title:
+                                      AppLocalizations.of(context)!.exercises,
                                 );
                               },
                             ),
@@ -313,8 +315,8 @@ class _ProgressScreenState extends State<ProgressScreen> {
                                 return CalculateExercise(
                                   value: state.timeWorkoutCompleted != null
                                       ? "${state.timeWorkoutCompleted}"
-                                      : "No info",
-                                  title: "Minutes",
+                                      : AppLocalizations.of(context)!.no_info,
+                                  title: AppLocalizations.of(context)!.minutes,
                                 );
                               },
                             ),

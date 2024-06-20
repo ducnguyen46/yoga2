@@ -3,6 +3,7 @@ import 'package:yoga/core/repositories/app_repository.dart';
 import 'package:yoga/models/category.dart';
 import 'package:yoga/models/exercise.dart';
 import 'package:yoga/models/exercise_completed.dart';
+import 'package:yoga/models/exercise_lang.dart';
 import 'package:yoga/models/weight.dart';
 
 class AppRepositoryImp extends AppRepository {
@@ -91,5 +92,10 @@ class AppRepositoryImp extends AppRepository {
   @override
   Future<bool> addWeight(double weight, DateTime date) {
     return _dbProvider.addWeight(weight, date);
+  }
+
+  @override
+  Future<List<ExerciseLang>> getAllExerciseLang() {
+    return _dbProvider.getAllExerciseLang();
   }
 }

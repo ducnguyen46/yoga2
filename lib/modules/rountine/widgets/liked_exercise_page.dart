@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:yoga/modules/rountine/cubit/liked_exercise_cubit.dart';
 import 'package:yoga/modules/rountine/widgets/yoga_category_card_grid.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class ExerciseLikedPage extends StatelessWidget {
   @override
@@ -28,7 +29,7 @@ class ExerciseLikedPage extends StatelessWidget {
                     vertical: 25,
                   ),
                   child: Text(
-                    "Exercises are liked by you!",
+                    AppLocalizations.of(context)!.exercise_liked_by_you,
                     style: TextStyle(
                       color: Colors.black,
                       fontFamily: 'GT',

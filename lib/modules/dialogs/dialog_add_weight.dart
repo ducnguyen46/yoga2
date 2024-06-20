@@ -5,6 +5,7 @@ import 'package:table_calendar/table_calendar.dart';
 import 'package:yoga/constants/app_color.dart';
 import 'package:yoga/modules/dialogs/dialog_alert.dart';
 import 'package:yoga/modules/progress/cubit/progress_cubit.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class DialogAddWeight extends StatefulWidget {
   @override
@@ -28,8 +29,8 @@ class _DialogAddWeightState extends State<DialogAddWeight> {
   void _addWeightCompleted(String value) {
     RegExp regExpDoubleNumber = RegExp(regex);
     if (!regExpDoubleNumber.hasMatch(value)) {
-      _showAlertDialog("Hmmmm, have wrong weight?!",
-          "Enter the correct number for your weight\n Ex: 50, 50.5", false);
+      _showAlertDialog(AppLocalizations.of(context)!.noti_wrong_weight,
+          AppLocalizations.of(context)!.noti_wrong_weight_des, false);
       _focusWeight.requestFocus();
     } else {
       _addWeightToDB(context, double.parse(value), _selectedDay, _selectKg);
@@ -44,8 +45,8 @@ class _DialogAddWeightState extends State<DialogAddWeight> {
     }
     await context.read<ProgressCubit>().addWeight(weight, date).then((_) {
       Navigator.pop(context);
-      _showAlertDialog("Success!",
-          "We just add your weight!. Have a nice day with strong body!", true);
+      _showAlertDialog(AppLocalizations.of(context)!.success,
+          AppLocalizations.of(context)!.noti_added_weight, true);
     }, onError: (error) {
       print("This is error: $error");
     });
@@ -216,7 +217,7 @@ class _DialogAddWeightState extends State<DialogAddWeight> {
                   ),
                   decoration: InputDecoration(
                     border: InputBorder.none,
-                    hintText: "Your weight",
+                    hintText: AppLocalizations.of(context)!.your_weight,
                     hintStyle: TextStyle(
                       fontSize: 12,
                     ),
@@ -290,7 +291,7 @@ class _DialogAddWeightState extends State<DialogAddWeight> {
                 ),
                 child: Center(
                   child: Text(
-                    "Cancle",
+                    AppLocalizations.of(context)!.cancel,
                     style: TextStyle(
                       color: Colors.white,
                       fontSize: 18,
@@ -315,7 +316,7 @@ class _DialogAddWeightState extends State<DialogAddWeight> {
                 ),
                 child: Center(
                   child: Text(
-                    "Save",
+                    AppLocalizations.of(context)!.save,
                     style: TextStyle(
                       color: Colors.white,
                       fontSize: 18,

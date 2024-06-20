@@ -3,6 +3,7 @@ import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 import 'package:yoga/constants/app_color.dart';
 import 'package:yoga/modules/rountine/widgets/liked_exercise_page.dart';
 import 'package:yoga/modules/rountine/widgets/routine_page.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class RoutineScreen extends StatelessWidget {
   final PageController _pageController = PageController();
@@ -24,7 +25,7 @@ class RoutineScreen extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
-                    'Yoga App',
+                    AppLocalizations.of(context)!.yoga_app,
                     style: TextStyle(
                       fontFamily: 'Victoria',
                       fontSize: 70,
@@ -33,7 +34,7 @@ class RoutineScreen extends StatelessWidget {
                     ),
                   ),
                   Text(
-                    'Your Routines and your exercises are here!',
+                    AppLocalizations.of(context)!.your_routine,
                     style: TextStyle(
                       fontFamily: 'GT',
                       fontSize: 17,

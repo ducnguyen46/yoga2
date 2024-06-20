@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:yoga/models/category.dart';
 import 'package:yoga/modules/dashboard/widgets/yoga_category_card.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class YogaCategoriesTypes extends StatefulWidget {
   final List<Category> listCategory;
@@ -54,7 +55,7 @@ class YogaCategory extends StatelessWidget {
         Padding(
           padding: const EdgeInsets.only(left: 25, right: 25),
           child: Text(
-            'Yoga ${getTypeCategory(_listCategory[0].type)}',
+            'Yoga ${getTypeCategory(context, _listCategory[0].type)}',
             style: TextStyle(
               color: Colors.black,
               fontFamily: 'GT',
@@ -88,31 +89,31 @@ class YogaCategory extends StatelessWidget {
     );
   }
 
-  String getTypeCategory(String typeOriginal) {
+  String getTypeCategory(BuildContext context, String typeOriginal) {
     switch (typeOriginal) {
       case "popular":
-        return "Popular";
+        return AppLocalizations.of(context)!.popular;
 
       case "beginners":
-        return "Beginners";
+        return AppLocalizations.of(context)!.beginners;
 
       case "better_life":
-        return "Better Life";
+        return AppLocalizations.of(context)!.better_life;
 
       case "stress_relax":
-        return "Stress Relax";
+        return AppLocalizations.of(context)!.stress_relax;
 
       case "women":
-        return "Women";
+        return AppLocalizations.of(context)!.women;
 
       case "seasons":
-        return "Seasons";
+        return AppLocalizations.of(context)!.seasons;
 
       case "routines":
-        return "Routines";
+        return AppLocalizations.of(context)!.routines;
 
       default:
-        return "Something other";
+        return AppLocalizations.of(context)!.something_other;
     }
   }
 }

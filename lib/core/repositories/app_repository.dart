@@ -1,6 +1,7 @@
 import 'package:yoga/models/category.dart';
 import 'package:yoga/models/exercise.dart';
 import 'package:yoga/models/exercise_completed.dart';
+import 'package:yoga/models/exercise_lang.dart';
 import 'package:yoga/models/weight.dart';
 
 abstract class AppRepository {
@@ -20,4 +21,5 @@ abstract class AppRepository {
   Future<double?> sumTimeCompleted();
   Future<List<Weight>> getAllWeight();
   Future<bool> addWeight(double weight, DateTime date);
+  Future<List<ExerciseLang>> getAllExerciseLang();
 }

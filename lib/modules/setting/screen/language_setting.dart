@@ -1,7 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:yoga/constants/app_color.dart';
 import 'package:yoga/constants/app_path.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:yoga/extensions/app_extension.dart';
+import 'package:yoga/models/language_set.dart';
+import 'package:yoga/modules/app_language/cubit/app_language_cubit.dart';
 
 class LanguageSetting extends StatefulWidget {
   @override
@@ -10,6 +15,34 @@ class LanguageSetting extends StatefulWidget {
 
 class _LanguageSettingState extends State<LanguageSetting> {
   int _tabSelect = 0;
+
+  final langs = [
+    LanguageSet(
+      language: "English",
+      image: "english",
+      languageCode: "en",
+    ),
+    LanguageSet(
+      language: "France",
+      image: "france",
+      languageCode: "fr",
+    ),
+    LanguageSet(
+      language: "Italia",
+      image: "italy",
+      languageCode: "it",
+    ),
+    LanguageSet(
+      language: "Portugal",
+      image: "portugal",
+      languageCode: "pt",
+    ),
+    LanguageSet(
+      language: "Россия",
+      image: "russia",
+      languageCode: "ru",
+    ),
+  ];
 
   @override
   Widget build(BuildContext context) {
@@ -83,7 +116,7 @@ class _LanguageSettingState extends State<LanguageSetting> {
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
                         Text(
-                          'Language',
+                          AppLocalizations.of(context)!.language,
                           style: TextStyle(
                             fontFamily: 'Victoria',
                             fontSize: 70,
@@ -96,16 +129,16 @@ class _LanguageSettingState extends State<LanguageSetting> {
                   ),
                   Expanded(
                     child: ListView.builder(
-                      itemCount: 1,
+                      itemCount: langs.length,
                       itemBuilder: (context, index) {
+                        final lang = langs[index];
                         return GestureDetector(
                           onTap: () {
-                            setState(() {
-                              _tabSelect = index;
-                            });
+                            changeLanguage(context, index, lang.languageCode);
                           },
                           child: LanguageSelect(
-                              language: "english",
+                              language: lang.language.hardCode,
+                              image: lang.image,
                               tabAt: index,
                               tabSelect: _tabSelect),
                         );
@@ -115,44 +148,24 @@ class _LanguageSettingState extends State<LanguageSetting> {
                 ],
               ),
             ),
-
-            // nút OKE
-            //
-            Positioned(
-              left: size.width / 4 + 20,
-              bottom: 25,
-              child: GestureDetector(
-                onTap: () {},
-                child: Container(
-                  padding: EdgeInsets.all(8),
-                  width: size.width / 2 - 40,
-                  decoration: BoxDecoration(
-                    color: AppColor.purpleDecor,
-                    borderRadius: BorderRadius.circular(10),
-                    // shape: BoxShape.circle,
-                  ),
-                  child: Center(
-                    child: Text(
-                      "Select",
-                      style: TextStyle(
-                        color: AppColor.reallyWhite,
-                        fontSize: 16,
-                        fontWeight: FontWeight.w500,
-                        fontFamily: "GT",
-                      ),
-                    ),
-                  ),
-                ),
-              ),
-            ),
           ],
         ),
       ),
     );
   }
+
+  Future<void> changeLanguage(
+      BuildContext context, int index, String languageCode) async {
+    final _languageCubit = context.read<AppLanguageCubit>();
+    _languageCubit.changeLanguage(context, languageCode);
+    setState(() {
+      _tabSelect = index;
+    });
+  }
 }
 
 class LanguageSelect extends StatelessWidget {
+  final String image;
   final String language;
   final int tabAt;
   final int tabSelect;
@@ -160,6 +173,7 @@ class LanguageSelect extends StatelessWidget {
   const LanguageSelect({
     Key? key,
     required this.language,
+    required this.image,
     required this.tabAt,
     required this.tabSelect,
   }) : super(key: key);
@@ -191,7 +205,7 @@ class LanguageSelect extends StatelessWidget {
               Padding(
                 padding: const EdgeInsets.all(8.0),
                 child: SvgPicture.asset(
-                  AppPath.toAssetsFlag + "$language.svg",
+                  AppPath.toAssetsFlag + "$image.svg",
                   height: 25,
                   width: 25,
                 ),

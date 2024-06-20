@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:yoga/modules/dashboard/screen/dashboard_screen.dart';
 import 'package:yoga/modules/splashscreen/screen/welcome_screen.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class YogaComing extends StatelessWidget {
   @override
@@ -21,7 +22,7 @@ class YogaComing extends StatelessWidget {
                     ? DashboardScreen()
                     : WelcomeScreen();
               } else {
-                return Text("Loi roi");
+                return Text(AppLocalizations.of(context)!.something_other);
               }
           }
         },

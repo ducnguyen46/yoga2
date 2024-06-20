@@ -6,6 +6,7 @@ import 'package:yoga/constants/app_path.dart';
 import 'package:yoga/core/datasource/database_provider.dart';
 import 'package:yoga/modules/dashboard/screen/dashboard_screen.dart';
 import 'package:yoga/modules/dialogs/dialog_alert.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class WelcomeScreen extends StatefulWidget {
   @override
@@ -23,8 +24,11 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
     RegExp regExpDoubleNumber = RegExp(regex);
     if (!regExpDoubleNumber.hasMatch(value)) {
       _letgo = false;
-      _showAlertDialog("Hmmmm, have wrong weight?!",
-          "Enter the correct number for your weight\n Ex: 50, 50.5", false);
+      _showAlertDialog(
+        AppLocalizations.of(context)!.noti_wrong_weight,
+        AppLocalizations.of(context)!.noti_wrong_weight_des,
+        false,
+      );
       _focusWeight.requestFocus();
     } else {
       // _addWeightToDB(double.parse(value));
@@ -36,13 +40,14 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
               await SharedPreferences.getInstance();
           sharedPreferences.setBool("Opened", true);
           _letgo = true;
-          _showAlertDialog(
-              "Success!",
-              "We just add your weight!. Have a nice day with strong body!",
-              true);
+          _showAlertDialog("${AppLocalizations.of(context)!.success}!",
+              AppLocalizations.of(context)!.noti_added_weight, true);
         } else {
-          _showAlertDialog("Hmmmm, have wrong weight?!",
-              "Enter the correct number for your weight\n Ex: 50, 50.5", false);
+          _showAlertDialog(
+            AppLocalizations.of(context)!.noti_wrong_weight,
+            AppLocalizations.of(context)!.noti_wrong_weight_des,
+            false,
+          );
         }
       }, onError: (error) {
         print("This is error: $error");
@@ -141,7 +146,7 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
                       ),
                       Expanded(
                         child: Text(
-                          'Yoga Mediation from Beginners and Advanced levels, exercise for weight loss and fitness.',
+                          AppLocalizations.of(context)!.yogo_app_welcome,
                           style: TextStyle(
                             fontFamily: 'GT',
                             fontSize: 17,
@@ -229,7 +234,7 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
                           ),
                           child: Center(
                             child: Text(
-                              "Let's go",
+                              AppLocalizations.of(context)!.lets_go,
                               style: TextStyle(
                                 color: Colors.white,
                                 fontSize: 18,

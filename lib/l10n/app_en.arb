@@ -1,0 +1,52 @@
+{
+    "success" : "Success",
+    "cancel" : "Cancel",
+    "save" : "Save",
+    "done" : "Done",
+    "lets_go" : "Let's go",
+    "more" : "More",
+    "error": "Some thing error! Please try again later",
+
+    "exercise" : "Exercise",
+    "progress" : "Progress",
+    "routine" : "Routine",
+    "setting" : "Setting",
+    "yoga_app" : "Yoga App",
+    "yoga_app_sologan": "Find your Yoga exercise today.",
+    "yogo_app_welcome" : "Yoga Meditation for Beginners and Advanced levels, exercise for weight loss and fitness.",
+    
+    "popular" : "Popular",
+    "beginners" : "Beginners",
+    "better_life" : "Better Life",
+    "stress_relax" : "Stress Relax",
+    "women" : "Women",
+    "seasons" : "Seasons",
+    "routines" : "Routines",
+    "something_other" : "Something other",
+
+    "your_weight" : "Your weight",
+
+    "noti_wrong_weight" : "Hmmmm, have wrong weight?!",
+    "noti_wrong_weight_des" : "Enter the correct number for your weight\n Ex: 50, 50.5",
+    "noti_added_weight" : "We just add your weight!. Have a nice day with strong body!",
+    
+    "how_to_perform" : "How to perform",
+    "current" : "Current",
+    "max" : "Max",
+    "min" : "Min", 
+    "statistic" : "Statistic",
+    "workout" : "Workout", 
+    "no_info" : "No info",
+    "exercises" : "Exercises",
+    "minutes" : "Minutes",
+    "add_weight": "Add weight",
+
+    "your_routine_slogan" : "Your Routines and your exercises are here!",
+    "exercise_liked_by_you" : "Exercises are liked by you!",
+    "your_routine" : "Your routines",
+
+    "push_noti" : "Push notifications",
+    "language" : "Language",
+    "about_us" : "About us",
+    "privacy_policy" : "Privacy policy"
+}

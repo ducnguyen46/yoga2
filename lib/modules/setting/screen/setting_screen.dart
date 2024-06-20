@@ -5,6 +5,7 @@ import 'package:yoga/modules/setting/screen/language_setting.dart';
 import 'package:yoga/modules/setting/screen/service_setting.dart';
 import 'package:yoga/modules/setting/widgets/setting_select.dart';
 import 'package:yoga/modules/setting/widgets/switch_button.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class SettingScreen extends StatefulWidget {
   @override
@@ -31,7 +32,7 @@ class _SettingScreenState extends State<SettingScreen> {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
-                    'Setting',
+                    AppLocalizations.of(context)!.setting,
                     style: TextStyle(
                       fontFamily: 'Victoria',
                       fontSize: 70,
@@ -56,7 +57,7 @@ class _SettingScreenState extends State<SettingScreen> {
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     Text(
-                      "Push notifications",
+                      AppLocalizations.of(context)!.push_noti,
                       style: TextStyle(
                         color: Colors.black,
                         fontSize: 19,
@@ -88,7 +89,7 @@ class _SettingScreenState extends State<SettingScreen> {
                   horizontal: 25,
                 ),
                 child: Text(
-                  "More",
+                  AppLocalizations.of(context)!.more,
                   style: TextStyle(
                     color: AppColor.purpleDecor,
                     fontSize: 16,
@@ -98,7 +99,7 @@ class _SettingScreenState extends State<SettingScreen> {
                 ),
               ),
               SettingSelection(
-                settingName: "Language",
+                settingName: AppLocalizations.of(context)!.language,
                 onTap: () {
                   Navigator.push(
                     context,
@@ -109,7 +110,7 @@ class _SettingScreenState extends State<SettingScreen> {
                 },
               ),
               SettingSelection(
-                settingName: "About us",
+                settingName: AppLocalizations.of(context)!.about_us,
                 onTap: () {
                   Navigator.push(
                     context,
@@ -120,7 +121,7 @@ class _SettingScreenState extends State<SettingScreen> {
                 },
               ),
               SettingSelection(
-                settingName: "Privacy policy",
+                settingName: AppLocalizations.of(context)!.privacy_policy,
                 onTap: () {
                   Navigator.push(
                     context,

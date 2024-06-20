@@ -4,6 +4,7 @@ import 'package:yoga/constants/app_color.dart';
 import 'package:yoga/constants/app_path.dart';
 import 'package:yoga/models/category.dart';
 import 'package:yoga/modules/exercise/screen/exercises_screen.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class YogaCategoryCard extends StatelessWidget {
   final Category category;
@@ -85,7 +86,7 @@ class YogaCategoryCard extends StatelessWidget {
                       Padding(
                         padding: const EdgeInsets.only(left: 7, right: 7),
                         child: Text(
-                          '${category.count / 2} minutes',
+                          '${category.count / 2} ${AppLocalizations.of(context)!.minutes.toLowerCase()}',
                           style: TextStyle(
                             color: Colors.black,
                             fontSize: 15,
@@ -114,7 +115,7 @@ class YogaCategoryCard extends StatelessWidget {
                       Padding(
                         padding: const EdgeInsets.only(left: 7, right: 7),
                         child: Text(
-                          '${category.count} exercises',
+                          '${category.count} ${AppLocalizations.of(context)!.exercises.toLowerCase()}',
                           style: TextStyle(
                             color: Colors.black,
                             fontSize: 15,

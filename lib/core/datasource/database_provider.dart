@@ -4,6 +4,7 @@ import 'package:flutter/services.dart';
 import 'package:path/path.dart';
 import 'package:sqflite/sqflite.dart';
 import 'package:yoga/models/exercise_completed.dart';
+import 'package:yoga/models/exercise_lang.dart';
 import 'package:yoga/models/weight.dart';
 
 import '../../models/category.dart';
@@ -359,5 +360,21 @@ class DatabaseProvider {
         querySelectComplete.map((json) => Category.fromJson(json)).toList();
 
     return categories;
+  }
+
+  // ---------------- DB about language ------------------ //
+  // Get description about exercises with language: pt, fr, it, ru
+  Future<List<ExerciseLang>> getAllExerciseLang() async {
+    var db = await database;
+    var queryGetLang = await db.query(
+      "lang",
+      columns: ["key", "pt", "fr", "it", "ru"],
+      where: "key NOT LIKE = ?",
+      whereArgs: ["category_%"],
+    );
+
+    final langs =
+        queryGetLang.map((json) => ExerciseLang.fromJson(json)).toList();
+    return langs;
   }
 }

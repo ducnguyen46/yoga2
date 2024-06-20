@@ -3,6 +3,7 @@ import 'package:flutter_svg/svg.dart';
 import 'package:yoga/constants/app_color.dart';
 import 'package:yoga/constants/app_path.dart';
 import 'package:yoga/models/exercise.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class DialogExercise extends StatelessWidget {
   final Exercise exercise;
@@ -91,7 +92,7 @@ class DialogExerciseInfo extends StatelessWidget {
               Padding(
                 padding: const EdgeInsets.only(top: 16, bottom: 4),
                 child: Text(
-                  "How to perform:",
+                  "${AppLocalizations.of(context)!.how_to_perform}:",
                   style: TextStyle(
                     color: Colors.black,
                     fontSize: 17,
