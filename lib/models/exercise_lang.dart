@@ -15,7 +15,7 @@ class ExerciseLang {
 
   factory ExerciseLang.fromJson(Map<String, dynamic> json) {
     return ExerciseLang(
-      key: json["id"],
+      key: json["key"],
       pt: json["pt"],
       fr: json["fr"],
       it: json["it"],

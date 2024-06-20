@@ -5,8 +5,8 @@ import 'package:yoga/constants/app_color.dart';
 import 'package:yoga/constants/app_path.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:yoga/extensions/app_extension.dart';
-import 'package:yoga/models/language_set.dart';
 import 'package:yoga/modules/app_language/cubit/app_language_cubit.dart';
+import 'package:yoga/modules/setting/cubit/language_setting_cubit.dart';
 
 class LanguageSetting extends StatefulWidget {
   @override
@@ -14,36 +14,6 @@ class LanguageSetting extends StatefulWidget {
 }
 
 class _LanguageSettingState extends State<LanguageSetting> {
-  int _tabSelect = 0;
-
-  final langs = [
-    LanguageSet(
-      language: "English",
-      image: "english",
-      languageCode: "en",
-    ),
-    LanguageSet(
-      language: "France",
-      image: "france",
-      languageCode: "fr",
-    ),
-    LanguageSet(
-      language: "Italia",
-      image: "italy",
-      languageCode: "it",
-    ),
-    LanguageSet(
-      language: "Portugal",
-      image: "portugal",
-      languageCode: "pt",
-    ),
-    LanguageSet(
-      language: "Россия",
-      image: "russia",
-      languageCode: "ru",
-    ),
-  ];
-
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
@@ -127,20 +97,37 @@ class _LanguageSettingState extends State<LanguageSetting> {
                       ],
                     ),
                   ),
-                  Expanded(
-                    child: ListView.builder(
-                      itemCount: langs.length,
-                      itemBuilder: (context, index) {
-                        final lang = langs[index];
-                        return GestureDetector(
-                          onTap: () {
-                            changeLanguage(context, index, lang.languageCode);
-                          },
-                          child: LanguageSelect(
-                              language: lang.language.hardCode,
-                              image: lang.image,
-                              tabAt: index,
-                              tabSelect: _tabSelect),
+                  BlocProvider(
+                    create: (context) => LanguageSettingCubit()
+                      ..initLanguage(
+                        context.read<AppLanguageCubit>().state.appLocale,
+                      ),
+                    child: BlocBuilder<LanguageSettingCubit, int>(
+                      builder: (context, state) {
+                        final langCubit = context.read<LanguageSettingCubit>();
+                        return Expanded(
+                          child: ListView.builder(
+                            itemCount: langCubit.langSets.length,
+                            itemBuilder: (context, index) {
+                              final lang = langCubit.langSets[index];
+                              return GestureDetector(
+                                onTap: () {
+                                  changeLanguage(
+                                    context,
+                                    index,
+                                    lang.languageCode,
+                                  );
+                                  langCubit.selectLanguage(index);
+                                },
+                                child: LanguageSelect(
+                                  language: lang.language.hardCode,
+                                  image: lang.image,
+                                  tabAt: index,
+                                  tabSelect: state,
+                                ),
+                              );
+                            },
+                          ),
                         );
                       },
                     ),
@@ -158,9 +145,6 @@ class _LanguageSettingState extends State<LanguageSetting> {
       BuildContext context, int index, String languageCode) async {
     final _languageCubit = context.read<AppLanguageCubit>();
     _languageCubit.changeLanguage(context, languageCode);
-    setState(() {
-      _tabSelect = index;
-    });
   }
 }
 

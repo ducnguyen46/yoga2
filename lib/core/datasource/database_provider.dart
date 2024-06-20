@@ -369,7 +369,7 @@ class DatabaseProvider {
     var queryGetLang = await db.query(
       "lang",
       columns: ["key", "pt", "fr", "it", "ru"],
-      where: "key NOT LIKE = ?",
+      where: "key NOT LIKE ?",
       whereArgs: ["category_%"],
     );
 

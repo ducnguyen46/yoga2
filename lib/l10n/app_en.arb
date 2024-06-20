@@ -1,4 +1,6 @@
 {
+    "@@locale" : "en",
+
     "success" : "Success",
     "cancel" : "Cancel",
     "save" : "Save",

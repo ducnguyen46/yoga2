@@ -5,6 +5,7 @@ import 'package:yoga/constants/app_color.dart';
 import 'package:yoga/constants/app_path.dart';
 import 'package:yoga/core/repositories/app_repository_imp.dart';
 import 'package:yoga/models/category.dart';
+import 'package:yoga/modules/app_language/cubit/app_language_cubit.dart';
 import 'package:yoga/modules/exercise/cubit/exercises_cubit.dart';
 import 'package:yoga/modules/exercise/screen/exercise_screen.dart';
 import 'package:yoga/modules/exercise/widget/exercise_card.dart';
@@ -41,8 +42,7 @@ class _ExercisesScreenState extends State<ExercisesScreen> {
     return BlocProvider(
       create: (context) => ExercisesCubit(context.read<AppRepositoryImp>())
         ..getInitialValues(
-          widget.category,
-        ),
+            widget.category, context.read<AppLanguageCubit>().state.appLocale),
       child: Scaffold(
         body: Container(
           height: size.height,

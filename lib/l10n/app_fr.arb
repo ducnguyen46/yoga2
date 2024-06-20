@@ -1,52 +1,54 @@
 {
-    "success": "Succès",
-    "cancel": "Annuler",
-    "save": "Sauvegarder",
-    "done": "Terminé",
-    "more" : "Plus",
-    "lets_go" : "Allons-y",
-    "error": "Une erreur est survenue ! Veuillez réessayer plus tard",
-  
-    "exercise": "Exercice",
-    "progress": "Progrès",
-    "routine": "Routine",
-    "setting": "Paramètres",
-    "yoga_app": "Application de yoga",
-    "yoga_app_sologan": "Trouvez votre exercice de yoga aujourd'hui.",
-    "yogo_app_welcome" : "Méditation de yoga pour niveaux débutants et avancés, exercices de perte de poids et de remise en forme.",
-  
-    "popular": "Populaire",
-    "beginners": "Débutants",
-    "better_life": "Meilleure vie",
-    "stress_relax": "Détente du stress",
-    "women": "Femmes",
-    "seasons": "Saisons",
-    "routines": "Routines",
-    "something_other": "Quelque chose d'autre",
-  
-    "your_weight": "Votre poids",
-  
-    "noti_wrong_weight": "Hmmmm, poids incorrect ?! ",
-    "noti_wrong_weight_des": "Entrez le nombre correct pour votre poids\n Ex: 50, 50.5",
-    "noti_added_weight": "Nous venons d'ajouter votre poids ! Passez une bonne journée avec un corps fort !",
-  
-    "how_to_perform": "Comment effectuer",
-    "current": "Actuel",
-    "max": "Max",
-    "min": "Min",
-    "statistic": "Statistique",
-    "workout": "Entraînement",
-    "no_info": "Aucune information",
-    "exercises": "Exercices",
-    "minutes": "Minutes",
-    "add_weight": "Ajouter du poids",
-  
-    "your_routine_slogan": "Vos routines et vos exercices sont ici !",
-    "exercise_liked_by_you": "Exercices aimés par vous !",
-    "your_routine": "Vos routines",
-  
-    "push_noti": "Notifications push",
-    "language": "Langue",
-    "about_us": "À propos de nous",
-    "privacy_policy": "Politique de confidentialité"
-  }
+  "@@locale" : "fr",
+
+  "success": "Succès",
+  "cancel": "Annuler",
+  "save": "Sauvegarder",
+  "done": "Terminé",
+  "more" : "Plus",
+  "lets_go" : "Allons-y",
+  "error": "Une erreur est survenue ! Veuillez réessayer plus tard",
+
+  "exercise": "Exercice",
+  "progress": "Progrès",
+  "routine": "Routine",
+  "setting": "Paramètres",
+  "yoga_app": "Application de yoga",
+  "yoga_app_sologan": "Trouvez votre exercice de yoga aujourd'hui.",
+  "yogo_app_welcome" : "Méditation de yoga pour niveaux débutants et avancés, exercices de perte de poids et de remise en forme.",
+
+  "popular": "Populaire",
+  "beginners": "Débutants",
+  "better_life": "Meilleure vie",
+  "stress_relax": "Détente du stress",
+  "women": "Femmes",
+  "seasons": "Saisons",
+  "routines": "Routines",
+  "something_other": "Quelque chose d'autre",
+
+  "your_weight": "Votre poids",
+
+  "noti_wrong_weight": "Hmmmm, poids incorrect ?! ",
+  "noti_wrong_weight_des": "Entrez le nombre correct pour votre poids\n Ex: 50, 50.5",
+  "noti_added_weight": "Nous venons d'ajouter votre poids ! Passez une bonne journée avec un corps fort !",
+
+  "how_to_perform": "Comment effectuer",
+  "current": "Actuel",
+  "max": "Max",
+  "min": "Min",
+  "statistic": "Statistique",
+  "workout": "Entraînement",
+  "no_info": "Aucune information",
+  "exercises": "Exercices",
+  "minutes": "Minutes",
+  "add_weight": "Ajouter du poids",
+
+  "your_routine_slogan": "Vos routines et vos exercices sont ici !",
+  "exercise_liked_by_you": "Exercices aimés par vous !",
+  "your_routine": "Vos routines",
+
+  "push_noti": "Notifications push",
+  "language": "Langue",
+  "about_us": "À propos de nous",
+  "privacy_policy": "Politique de confidentialité"
+}
