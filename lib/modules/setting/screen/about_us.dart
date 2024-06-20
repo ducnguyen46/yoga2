@@ -3,6 +3,7 @@ import 'package:flutter_svg/svg.dart';
 import 'package:yoga/constants/app_color.dart';
 import 'package:yoga/constants/app_path.dart';
 
+// ignore: must_be_immutable
 class AboutUsSetting extends StatelessWidget {
   String _aboutUs = "Hi there";
   @override

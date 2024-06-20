@@ -4,6 +4,7 @@ import 'package:flutter_svg/svg.dart';
 import 'package:yoga/constants/app_color.dart';
 import 'package:yoga/constants/app_path.dart';
 import 'package:yoga/modules/dashboard/cubit/dashboard_cubit.dart';
+import 'package:yoga/modules/dashboard/widgets/app_scaffold.dart';
 import 'package:yoga/modules/progress/screen/progress_screen.dart';
 import 'package:yoga/modules/rountine/screen/routine_screen.dart';
 import 'package:yoga/modules/setting/screen/setting_screen.dart';
@@ -42,8 +43,6 @@ class _DashboardScreenState extends State<DashboardScreen>
 
   @override
   Widget build(BuildContext context) {
-    var size = MediaQuery.of(context).size;
-
     List<MenuTab> menuTabs = [
       MenuTab(
         name: AppLocalizations.of(context)!.exercises,
@@ -63,141 +62,117 @@ class _DashboardScreenState extends State<DashboardScreen>
       ),
     ];
 
-    return Scaffold(
-      body: Container(
-        height: size.height,
-        width: size.width,
-        decoration: BoxDecoration(
-          color: AppColor.smokeWhite,
-        ),
-        child: Stack(
-          children: [
-            Positioned(
+    return AppScaffold(
+      children: [
+        //man hinh
+        BlocBuilder<DashboardCubit, DashboardState>(
+          buildWhen: (previous, current) =>
+              previous.isShowMenu != current.isShowMenu,
+          builder: (context, state) {
+            return AnimatedPositioned(
               top: 0,
-              right: 0,
-              child: SvgPicture.asset(
-                AppPath.toAssetsImages + "flower.svg",
-                height: size.width * 1,
-                width: size.width * 0.7,
+              bottom: 0,
+              left: state.isShowMenu ? 100 : 0,
+              right: state.isShowMenu ? -100 : 0,
+              duration: duration,
+              // man hinh chinh
+              child: BlocBuilder<DashboardCubit, DashboardState>(
+                buildWhen: (previous, current) =>
+                    previous.tabActive != current.tabActive,
+                builder: (context, state) {
+                  return SafeArea(
+                    bottom: false,
+                    child: screens[state.tabActive],
+                  );
+                },
               ),
-              // child: Image.asset(AppPath.toAssetsImages + "flower.png"),
-            ),
-            //
-            //man hinh
-            BlocBuilder<DashboardCubit, DashboardState>(
-              buildWhen: (previous, current) =>
-                  previous.isShowMenu != current.isShowMenu,
-              builder: (context, state) {
-                return AnimatedPositioned(
-                  top: 0,
-                  bottom: 0,
-                  left: state.isShowMenu ? 100 : 0,
-                  right: state.isShowMenu ? -100 : 0,
-                  duration: duration,
-                  // man hinh chinh
-                  child: BlocBuilder<DashboardCubit, DashboardState>(
-                    buildWhen: (previous, current) =>
-                        previous.tabActive != current.tabActive,
-                    builder: (context, state) {
-                      return SafeArea(
-                        bottom: false,
-                        child: screens[state.tabActive],
-                      );
-                    },
-                  ),
-                );
-              },
-            ),
-
-            // menu
-            BlocBuilder<DashboardCubit, DashboardState>(
-              buildWhen: (previous, current) =>
-                  previous.isShowMenu != current.isShowMenu,
-              builder: (context, state) {
-                return AnimatedPositioned(
-                  top: 0,
-                  bottom: 0,
-                  left: state.isShowMenu ? 0 : -100,
-                  right: state.isShowMenu ? size.width - 100 : size.width,
-                  duration: duration,
-                  child: SafeArea(
-                    child: Container(
-                      height: size.height,
-                      width: 100,
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.center,
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          for (MenuTab tab in menuTabs)
-                            GestureDetector(
-                              onTap: () {
-                                final dashboardCubit =
-                                    context.read<DashboardCubit>();
-                                dashboardCubit.selectTab(menuTabs.indexOf(tab));
-                              },
-                              child: MenuTabWidget(
-                                menuTab: tab,
-                                tabAt: menuTabs.indexOf(tab),
-                                tabActive: state.tabActive,
-                              ),
-                            ),
-                        ],
-                      ),
-                    ),
-                  ),
-                );
-              },
-            ),
-
-            //show menu button
-            Positioned(
-              left: 0,
+            );
+          },
+        ),
+        // menu
+        BlocBuilder<DashboardCubit, DashboardState>(
+          buildWhen: (previous, current) =>
+              previous.isShowMenu != current.isShowMenu,
+          builder: (context, state) {
+            return AnimatedPositioned(
+              top: 0,
+              bottom: 0,
+              left: state.isShowMenu ? 0 : -100,
+              duration: duration,
               child: SafeArea(
-                child: Padding(
-                  padding: const EdgeInsets.only(left: 25, right: 25, top: 10),
-                  child: Row(
+                child: Container(
+                  width: 100,
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    mainAxisAlignment: MainAxisAlignment.center,
                     children: [
-                      BlocBuilder<DashboardCubit, DashboardState>(
-                        buildWhen: (previous, current) =>
-                            previous.isShowMenu != current.isShowMenu,
-                        builder: (context, state) {
-                          return GestureDetector(
-                            onTap: () {
-                              context.read<DashboardCubit>().tapDrawer();
-                              if (state.isShowMenu) {
-                                _controller.reverse();
-                              } else {
-                                _controller.forward();
-                              }
-                            },
-                            child: Container(
-                              padding: EdgeInsets.all(10),
-                              decoration: BoxDecoration(
-                                shape: BoxShape.circle,
-                                color: AppColor.smokeWhite,
-                                boxShadow: [
-                                  BoxShadow(
-                                    color: AppColor.grayBlue.withOpacity(0.4),
-                                    offset: Offset(5, 5),
-                                    blurRadius: 30,
-                                  )
-                                ],
-                              ),
-                              child: SvgPicture.asset(state.isShowMenu
-                                  ? AppPath.toAssetsIcons + "cancle.svg"
-                                  : AppPath.toAssetsIcons + 'menu.svg'),
-                            ),
-                          );
-                        },
-                      ),
+                      for (MenuTab tab in menuTabs)
+                        GestureDetector(
+                          onTap: () {
+                            final dashboardCubit =
+                                context.read<DashboardCubit>();
+                            dashboardCubit.selectTab(menuTabs.indexOf(tab));
+                          },
+                          child: MenuTabWidget(
+                            menuTab: tab,
+                            tabAt: menuTabs.indexOf(tab),
+                            tabActive: state.tabActive,
+                          ),
+                        ),
                     ],
                   ),
                 ),
               ),
-            ),
-          ],
+            );
+          },
         ),
-      ),
+        //show menu button
+        Positioned(
+          left: 0,
+          child: SafeArea(
+            child: Padding(
+              padding: const EdgeInsets.only(left: 25, right: 25, top: 10),
+              child: Row(
+                children: [
+                  BlocBuilder<DashboardCubit, DashboardState>(
+                    buildWhen: (previous, current) =>
+                        previous.isShowMenu != current.isShowMenu,
+                    builder: (context, state) {
+                      return GestureDetector(
+                        onTap: () {
+                          context.read<DashboardCubit>().tapDrawer();
+                          if (state.isShowMenu) {
+                            _controller.reverse();
+                          } else {
+                            _controller.forward();
+                          }
+                        },
+                        child: Container(
+                          padding: EdgeInsets.all(10),
+                          decoration: BoxDecoration(
+                            shape: BoxShape.circle,
+                            color: AppColor.smokeWhite,
+                            boxShadow: [
+                              BoxShadow(
+                                color: AppColor.grayBlue.withOpacity(0.4),
+                                offset: Offset(5, 5),
+                                blurRadius: 30,
+                              )
+                            ],
+                          ),
+                          child: SvgPicture.asset(state.isShowMenu
+                              ? AppPath.toAssetsIcons + "cancle.svg"
+                              : AppPath.toAssetsIcons + 'menu.svg'),
+                        ),
+                      );
+                    },
+                  ),
+                ],
+              ),
+            ),
+          ),
+        ),
+      ],
     );
   }
 }
@@ -218,16 +193,15 @@ class MenuTabWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       margin: EdgeInsets.symmetric(vertical: 12),
-      width: 70,
-      height: 64,
+      width: 80,
       decoration: BoxDecoration(
         color: AppColor.reallyWhite,
-        borderRadius: BorderRadius.circular(18),
+        borderRadius: BorderRadius.circular(12),
         boxShadow: [
           BoxShadow(
             offset: Offset(4, 4),
-            color: AppColor.grayBlue.withOpacity(0.4),
-            blurRadius: 10,
+            color: AppColor.grayBlue.withOpacity(0.2),
+            blurRadius: 4,
           )
         ],
       ),
@@ -249,6 +223,7 @@ class MenuTabWidget extends StatelessWidget {
               padding: const EdgeInsets.only(top: 4),
               child: Text(
                 menuTab.name,
+                textAlign: TextAlign.center,
                 style: TextStyle(
                   color: tabActive == tabAt
                       ? AppColor.purpleDecor

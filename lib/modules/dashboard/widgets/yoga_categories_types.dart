@@ -19,9 +19,7 @@ class _YogaCategoriesTypesState extends State<YogaCategoriesTypes> {
   @override
   void initState() {
     _controller = ScrollController();
-    _controller.addListener(() {
-      // print('Offset: ' + _controller.offset.toString());
-    });
+    _controller.addListener(() {});
     super.initState();
   }
 

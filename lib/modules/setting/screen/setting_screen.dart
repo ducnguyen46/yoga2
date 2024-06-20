@@ -4,7 +4,7 @@ import 'package:yoga/modules/setting/screen/about_us.dart';
 import 'package:yoga/modules/setting/screen/language_setting.dart';
 import 'package:yoga/modules/setting/screen/service_setting.dart';
 import 'package:yoga/modules/setting/widgets/setting_select.dart';
-import 'package:yoga/modules/setting/widgets/switch_button.dart';
+// import 'package:yoga/modules/setting/widgets/switch_button.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class SettingScreen extends StatefulWidget {
@@ -13,7 +13,7 @@ class SettingScreen extends StatefulWidget {
 }
 
 class _SettingScreenState extends State<SettingScreen> {
-  bool _enableNoti = false;
+  // bool _enableNoti = false;
 
   @override
   Widget build(BuildContext context) {
@@ -51,6 +51,7 @@ class _SettingScreenState extends State<SettingScreen> {
             mainAxisAlignment: MainAxisAlignment.center,
             mainAxisSize: MainAxisSize.min,
             children: [
+              /** 
               Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 25),
                 child: Row(
@@ -83,7 +84,7 @@ class _SettingScreenState extends State<SettingScreen> {
                   color: AppColor.darkGray,
                   thickness: 0.5,
                 ),
-              ),
+              ),  */
               Padding(
                 padding: const EdgeInsets.symmetric(
                   horizontal: 25,

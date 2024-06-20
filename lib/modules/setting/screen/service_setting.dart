@@ -3,6 +3,7 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:yoga/constants/app_color.dart';
 import 'package:yoga/constants/app_path.dart';
 
+// ignore: must_be_immutable
 class ServiceSetting extends StatelessWidget {
   String _policy = "this SERVICE is provided by Suntech Ltd. at no cost and is intended for use as is." +
       "\n\nThis page is used to inform visitors regarding our policies with the collection, use, and disclosure of Personal Information if anyone decided to use our Service" +

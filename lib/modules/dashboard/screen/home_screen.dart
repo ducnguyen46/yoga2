@@ -26,36 +26,32 @@ class _HomeScreenState extends State<HomeScreen> {
         SizedBox(
           height: 50,
         ),
-        Row(
-          children: [
-            Container(
-              padding: EdgeInsets.symmetric(horizontal: 25),
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.start,
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Text(
-                    AppLocalizations.of(context)!.yoga_app,
-                    style: TextStyle(
-                      fontFamily: 'Victoria',
-                      fontSize: 70,
-                      fontWeight: FontWeight.w600,
-                      color: AppColor.purpleDecor,
-                    ),
-                  ),
-                  Text(
-                    AppLocalizations.of(context)!.yoga_app_sologan,
-                    style: TextStyle(
-                      fontFamily: 'GT',
-                      fontSize: 17,
-                      fontWeight: FontWeight.w400,
-                      color: AppColor.pupleBlue,
-                    ),
-                  ),
-                ],
+        Container(
+          padding: EdgeInsets.symmetric(horizontal: 25),
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.start,
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Text(
+                AppLocalizations.of(context)!.yoga_app,
+                style: TextStyle(
+                  fontFamily: 'Victoria',
+                  fontSize: 70,
+                  fontWeight: FontWeight.w600,
+                  color: AppColor.purpleDecor,
+                ),
               ),
-            )
-          ],
+              Text(
+                AppLocalizations.of(context)!.yoga_app_sologan,
+                style: TextStyle(
+                  fontFamily: 'GT',
+                  fontSize: 17,
+                  fontWeight: FontWeight.w400,
+                  color: AppColor.pupleBlue,
+                ),
+              ),
+            ],
+          ),
         ),
         Expanded(
           child: BlocBuilder<HomeCubit, HomeState>(builder: (context, state) {
@@ -72,7 +68,7 @@ class _HomeScreenState extends State<HomeScreen> {
                 itemBuilder: (context, index) {
                   //truyen vao listCategory
                   return Container(
-                    height: 309,
+                    height: 310,
                     width: size.width,
                     margin: EdgeInsets.only(top: 40),
                     child: YogaCategoriesTypes(

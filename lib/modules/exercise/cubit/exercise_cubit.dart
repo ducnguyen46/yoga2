@@ -19,7 +19,7 @@ class ExerciseCubit extends Cubit<ExerciseState> {
   final int exerciseTime = 30; // seconds
 
   void startWorkout() {
-    _timer = Timer.periodic(Duration(milliseconds: 0), (_) {
+    _timer = Timer.periodic(Duration(milliseconds: 1000), (_) {
       _countDownCheck();
     });
   }
